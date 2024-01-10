@@ -10,11 +10,15 @@
   },
   "dependencies": {
     "@azure/openai": "1.0.0-beta.10",
+    "cors": "^2.8.5",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "socket.io": "^4.7.3",
+    "socket.io-client": "^4.7.3"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
