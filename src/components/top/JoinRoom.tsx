@@ -15,10 +15,10 @@ import { io } from "socket.io-client";
 import { socketAtom } from "~/globalState/atoms";
 
 type Props = {
-  userName: string;
+  playerName: string;
 };
 
-const JoinRoom: FC<Props> = ({ userName }) => {
+const JoinRoom: FC<Props> = ({ playerName }) => {
   const [phrase, setPhrase] = useState("");
   const [, setSocket] = useAtom(socketAtom);
 
@@ -28,7 +28,7 @@ const JoinRoom: FC<Props> = ({ userName }) => {
     await fetch("/api/sockets", { method: "POST" });
     const socket = io({ autoConnect: false });
     socket.connect();
-    socket.emit("joinRoom", { id: "room1", name: userName });
+    socket.emit("joinRoom", { id: "room1", name: playerName });
     setSocket(socket);
   };
   return (
@@ -50,7 +50,7 @@ const JoinRoom: FC<Props> = ({ userName }) => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </ModalFooter>
       </Modal>
     </>
