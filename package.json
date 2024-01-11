@@ -6,11 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "next lint && prettier --write ./src/**/*.{js,jsx,ts,tsx,json,md}"
   },
   "dependencies": {
     "@azure/openai": "1.0.0-beta.10",
+    "@vercel/kv": "^1.0.1",
+    "@yamada-ui/react": "^1.1.5",
     "cors": "^2.8.5",
+    "jotai": "^2.6.1",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
@@ -18,12 +22,14 @@
     "socket.io-client": "^4.7.3"
   },
   "devDependencies": {
+    "@swc-jotai/react-refresh": "^0.1.0",
     "@types/cors": "^2.8.17",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "prettier": "3.1.1",
     "typescript": "^5"
   }
 }
