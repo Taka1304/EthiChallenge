@@ -14,20 +14,31 @@ import {
   Stepper,
   VStack,
 } from "@yamada-ui/react";
+import { useAtom } from "jotai";
 import React, { FC, useState } from "react";
 import { io } from "socket.io-client";
 import { createRoom } from "~/app/gameplay/_room";
+import {
+  roomAtom,
+  gamePhaseAtom,
+  playerAtom,
+  socketAtom,
+} from "~/globalState/atoms";
 
 type Props = {
-  userName: string;
+  playerName: string;
 };
 
-const CreateRoom: FC<Props> = ({ userName }) => {
+const CreateRoom: FC<Props> = ({ playerName }) => {
   const [phrase, setPhrase] = useState("");
   const [option, setOption] = useState<Option>({
-    level: "かんたん",
+    level: "かんたん", // Default
     gameCount: 3,
   });
+  const [, setSocket] = useAtom(socketAtom);
+  const [, setGamePhase] = useAtom(gamePhaseAtom);
+  const [, setRoomState] = useAtom(roomAtom);
+  const [player, setPlayer] = useAtom(playerAtom);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -36,13 +47,41 @@ const CreateRoom: FC<Props> = ({ userName }) => {
     const roomId = crypto.randomUUID();
     const socket = io({ autoConnect: false });
     socket.connect();
-    socket.emit("createRoom", { id: roomId, name: userName });
-    createRoom({
-      id: roomId,
-      hostName: userName,
-      level: option.level,
-      gameCount: option.gameCount,
-      phrase,
+    socket.emit("createRoom", { id: roomId, name: playerName });
+    socket.on("connect", () => {
+      console.log(socket.id);
+      setSocket(socket);
+      setPlayer({ ...player, id: socket.id || "" });
+      setRoomState({
+        id: roomId,
+        hostName: playerName,
+        options: {
+          level: option.level,
+          gameCount: option.gameCount,
+        },
+        phrase: phrase,
+        players: [
+          {
+            name: playerName,
+            id: socket.id || "",
+            avatar: "",
+            scores: [],
+            answers: [],
+            ready: false,
+            isHost: true,
+          },
+        ],
+      });
+      setGamePhase("matching");
+      // createRoom({
+      //   id: roomId,
+      //   hostName: playerName,
+      //   options: {
+      //     level: option.level,
+      //     gameCount: option.gameCount,
+      //   },
+      //   phrase: phrase,
+      // });
     });
   };
 
