@@ -50,6 +50,11 @@ export default function SocketHandler(
       console.log("Received message:", data);
     });
 
+    socket.on("changePlayerState", (data: Player, roomId: string) => {
+      console.log("Received changePlayerState:", data);
+      socket.broadcast.to(roomId).emit("changePlayerState", data);
+    });
+
     // クライアントが切断した場合の処理
     socket.on("disconnect", () => {
       console.log("A client disconnected.");

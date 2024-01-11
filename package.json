@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@azure/openai": "1.0.0-beta.10",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@vercel/kv": "^1.0.1",
+    "@yamada-ui/fontawesome": "^1.0.4",
     "@yamada-ui/react": "^1.1.5",
     "cors": "^2.8.5",
     "jotai": "^2.6.1",
