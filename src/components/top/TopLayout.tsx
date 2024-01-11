@@ -4,11 +4,11 @@ import { Heading, Input } from "@yamada-ui/react";
 import React from "react";
 import CreateRoom from "./CreateRoom";
 import JoinRoom from "./JoinRoom";
-import { userNameAtom } from "~/globalState/atoms";
+import { playerAtom } from "~/globalState/atoms";
 import { useAtom } from "jotai";
 
-const Layout = () => {
-  const [userName, setUserName] = useAtom(userNameAtom);
+const TopLayout = () => {
+  const [player, setPlayer] = useAtom(playerAtom);
 
   return (
     <>
@@ -16,13 +16,13 @@ const Layout = () => {
       <Input
         type="text"
         placeholder="ユーザー名を入力"
-        value={userName}
-        onChange={(e) => setUserName(e.target.value)}
+        value={player.name}
+        onChange={(e) => setPlayer({ ...player, name: e.target.value })}
       />
-      <CreateRoom userName={userName} />
-      <JoinRoom userName={userName} />
+      <CreateRoom playerName={player.name} />
+      <JoinRoom playerName={player.name} />
     </>
   );
 };
 
-export default Layout;
+export default TopLayout;

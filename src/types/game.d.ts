@@ -16,7 +16,10 @@ type Option = {
 
 type Player = {
   id: string; // Socket.id
+  avatar: string;
   name: string;
   scores: number[];
   answers: string[];
+  ready: boolean;
+  isHost: boolean;
 };

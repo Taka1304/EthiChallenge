@@ -8,8 +8,9 @@ type Room = {
   id: string;
   hostName: string;
   phrase: string;
-  players: number;
-} & Option;
+  players: Player[];
+  options: Option;
+};
 
 type CreateRoom = {
   id: string; //uuid
