@@ -5,7 +5,7 @@ services:
     image: data-dreamers-group3
     container_name: data-dreamers-group3
     ports:
-      - '3001:3000'
+      - "3001:3000"
     env_file:
       - .env.local
     volumes:
@@ -14,7 +14,7 @@ services:
       - ./src:/app/src
     # ホットリロード
     environment:
-     - WATCHPACK_POLLING=true
+      - WATCHPACK_POLLING=true
     restart: always
     tty: true
     stdin_open: true
