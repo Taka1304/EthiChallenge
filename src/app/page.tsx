@@ -6,7 +6,7 @@ import {
   Heading,
   VStack,
   HStack,
-  Link,
+  Link as UILink,
   Container,
   Button,
   Spacer,
@@ -17,6 +17,7 @@ import {
 } from "@yamada-ui/react";
 
 import React, { useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -56,16 +57,16 @@ export default function Home() {
             justifyContent="flex-end"
             h="3rem"
           >
-            <Link href=""
+            <UILink href=""
               fontWeight={"bold"}
               textDecoration={"underline"}
               color={"black"}
-            >ランキング</Link>
-            <Link href=""
+            >ランキング</UILink>
+            <UILink href=""
               fontWeight={"bold"}
               textDecoration={"underline"}
               color={"black"}
-            >アチーブメント</Link>
+            >アチーブメント</UILink>
           </HStack>
         </VStack>
         {/* END */}
@@ -85,22 +86,24 @@ export default function Home() {
                 <Heading>新感覚型対戦ゲーム</Heading>
               </Box>
               {/* リンク系はどうすればいいかわからないのでお願いします！ 一応Buttonにしておきました！ */}
-              <Box
-                textAlign={"left"}
-              >
-                <Button
-                  paddingStart="2rem"
-                  paddingEnd="2rem"
-                  paddingTop="1.5rem"
-                  paddingBottom="1.5rem"
-                  borderRadius="30"
-                  bg="#f36304"
-                  borderWidth="100px"
-                  border={"0.5px solid black"}
-                  boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
-                  w={"20%"}
-                >対戦する</Button>
-              </Box>
+              <Link href="/gameplay">
+                <Box
+                  textAlign={"left"}
+                  >
+                  <Button
+                    paddingStart="2rem"
+                    paddingEnd="2rem"
+                    paddingTop="1.5rem"
+                    paddingBottom="1.5rem"
+                    borderRadius="30"
+                    bg="#f36304"
+                    borderWidth="100px"
+                    border={"0.5px solid black"}
+                    boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+                    w={"20%"}
+                    >対戦する</Button>
+                </Box>
+              </Link>
             </VStack>
             {/* ここに画像が入るかも */}
           </HStack>
@@ -148,7 +151,8 @@ export default function Home() {
             </Box>
             <Image
               gridArea="image"
-              src="images/home-003.png"
+              src="/images/home-003.png"
+              alt="/images/home-003.png"
               h={"250px"}
               w={"250px"}
               bg={"pink.100"}
