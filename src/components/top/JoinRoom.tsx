@@ -8,6 +8,7 @@ import {
   Input,
   ModalFooter,
   useDisclosure,
+  Heading,
 } from "@yamada-ui/react";
 import { useAtom } from "jotai";
 import React, { FC, useState } from "react";
@@ -36,8 +37,9 @@ const JoinRoom: FC<Props> = ({ playerName }) => {
     <>
       <Button onClick={onOpen}>部屋に入る</Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
-        <ModalHeader>ドラゴンボール</ModalHeader>
+        <ModalHeader>部屋に入る</ModalHeader>
         <ModalBody>
+          <Heading as="p" size="sm">同じあいことばを入力した人と遊べます！</Heading>
           <Input
             type="text"
             placeholder="あいことばを入力"
