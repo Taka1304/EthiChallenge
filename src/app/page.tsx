@@ -58,9 +58,13 @@ export default function Home() {
           >
             <Link href=""
               fontWeight={"bold"}
+              textDecoration={"underline"}
+              color={"black"}
             >ランキング</Link>
             <Link href=""
               fontWeight={"bold"}
+              textDecoration={"underline"}
+              color={"black"}
             >アチーブメント</Link>
           </HStack>
         </VStack>
@@ -229,7 +233,9 @@ export default function Home() {
             {/* START */}
             <Grid templateAreas={`
             "one two three"
-            `}>
+            `}
+              fontWeight={"bold"}
+            >
               <Box
                 gridArea="one"
                 w="200px"
@@ -238,7 +244,15 @@ export default function Home() {
                 backgroundColor={"white"}
                 // border={"0.5px solid black"}
                 boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                textAlign={"center"}
               >
+                <Text>
+                  回答をAIが<br />
+                  自動で採点
+                </Text>
               </Box>
 
               <Box
@@ -249,8 +263,15 @@ export default function Home() {
                 backgroundColor={"white"}
                 // border={"0.5px solid black"}
                 boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                textAlign={"center"}
               >
-
+                <Text>
+                  2人～4人<br />
+                  対戦
+                </Text>
               </Box>
               <Box
                 gridArea="three"
@@ -260,8 +281,15 @@ export default function Home() {
                 backgroundColor={"white"}
                 // border={"0.5px solid black"}
                 boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                textAlign={"center"}
               >
-
+                <Text>
+                  模範解答<br />
+                  付き
+                </Text>
               </Box>
             </Grid>
             <Box
@@ -290,14 +318,23 @@ export default function Home() {
           justifyContent={"center"}
         >
           <Heading
-            fontSize={"2rem"}
+            fontSize={"1.8rem"}
             textAlign={"center"}
+            paddingLeft={"10px"}
+            paddingRight={"10px"}
           >
             みんなで一緒に、道徳心を身につけませんか？
           </Heading>
+          <Divider
+            bg={"#ffaa8c"}
+            h={"5px"}
+            marginTop={"15px"}
+          />
           <Container
             textAlign={"center"}
             fontWeight={"bold"}
+            fontSize={"1.3rem"}
+            marginTop={"20px"}
           >
             <Text>
               アプリ名、は小学生から中学生を対象に、<br />
