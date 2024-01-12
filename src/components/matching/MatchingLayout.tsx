@@ -1,7 +1,7 @@
-import { Box, Grid, HStack, Heading } from "@yamada-ui/react";
+import { Box, Button, Grid, HStack, Heading, Spacer } from "@yamada-ui/react";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
-import { playerAtom, roomAtom, socketAtom } from "~/globalState/atoms";
+import { gamePhaseAtom, playerAtom, roomAtom, socketAtom } from "~/globalState/atoms";
 import PlayerAvatar from "./Player";
 import { io } from "socket.io-client";
 
@@ -9,17 +9,13 @@ const MatchingLayout = () => {
   const [socket, setSocket] = useAtom(socketAtom);
   const [roomState, setRoomState] = useAtom(roomAtom);
   const [playerState, setPlayerState] = useAtom(playerAtom);
+  const [, setGamePhase] = useAtom(gamePhaseAtom);
+  
+  const initSocket = async () => {
+    console.log(socket)
 
-  console.log(roomState);
-  const updatePlayer = async () => {
-    await fetch("/api/sockets", { method: "POST" });
-    socket.emit("changePlayerState", playerState, roomState.id);
-    socket.on("connect", () => {
-      console.log(socket.id);
-      setPlayerState({ ...playerState, id: socket.id || "" });
-    });
-    socket.on("changePlayerState", (data: Player) => {
-      console.log("changePlayerState", data);
+    socket.on("updatePlayerState", (data: Player) => {
+      console.log("updatePlayerState", data);
       setRoomState((prevRoomState) => {
         const updatedPlayers = prevRoomState.players.map((player) => {
           if (player.id === data.id) {
@@ -30,20 +26,43 @@ const MatchingLayout = () => {
         return { ...prevRoomState, players: updatedPlayers };
       });
     });
+    socket.on("joinNewPlayer", (data: Room) => {
+      console.log("joinNewPlayer", data);
+      setRoomState(data);
+    });
+    socket.on("startGame", () => {
+      console.log("startGame");
+      setGamePhase("waiting");
+    });
+    socket.on("disconnect", () => {
+      console.log("disconnect");
+      setGamePhase("normal");
+    });
+    socket.on("updateRoomState", (data: Room) => {
+      console.log("updateRoomState", data);
+      setRoomState(data);
+    });
   };
 
   useEffect(() => {
-    updatePlayer();
-    return () => {
-      socket.disconnect();
-    };
-  }, [playerState]);
+    initSocket();
+  }, []);
+
+  console.log("roomState", roomState)
+  console.log("playerState", playerState)
+
+  const handleDisconnect = () => {
+    socket.disconnect();
+    setSocket(io({ autoConnect: false }));
+    setGamePhase("normal");
+  }
+
   return (
-    <Box textAlign="center">
+    <Box textAlign="center" display="flex" flexDirection="column" gap="xl">
       <Heading>このルームのあいことば: {roomState.phrase}</Heading>
       <Grid templateColumns="repeat(4, 1fr)" gap="md">
         {roomState.players.map((player) => (
-          <PlayerAvatar key={player.id} player={player}></PlayerAvatar>
+          <PlayerAvatar key={player.id} player={player}/>
           ))}
         {roomState.players.length < 4 && (
           <>
@@ -59,11 +78,20 @@ const MatchingLayout = () => {
                 ready: false,
                 isHost: false,
               }}
-              ></PlayerAvatar>
-              ))}
+              />
+            ))}
           </>
         )}
       </Grid>
+      <HStack>
+        <Button onClick={handleDisconnect}>
+          部屋から抜ける
+        </Button>
+        <Spacer />
+        {playerState.isHost && <Button onClick={() => socket.emit("startGame", roomState.id)}>
+          ゲームを開始する
+        </Button>}
+      </HStack>
     </Box>
   );
 };

@@ -13,11 +13,12 @@ import {
   HStack,
   Stepper,
   VStack,
+  Heading,
 } from "@yamada-ui/react";
 import { useAtom } from "jotai";
 import React, { FC, useState } from "react";
 import { io } from "socket.io-client";
-import { createRoom } from "~/app/gameplay/_room";
+import { createRoom, existsPhrase } from "~/app/gameplay/_room";
 import {
   roomAtom,
   gamePhaseAtom,
@@ -28,6 +29,13 @@ import {
 type Props = {
   playerName: string;
 };
+const steps: Steps = [
+  { title: "難易度", description: "" },
+  { title: "ゲーム数", description: "" },
+  { title: "あいことば", description: "" },
+];
+const LEVEL = ["かんたん", "ふつう", "むずかしい"];
+const GAME_COUNT = [1, 2, 3, 4, 5];
 
 const CreateRoom: FC<Props> = ({ playerName }) => {
   const [phrase, setPhrase] = useState("");
@@ -35,12 +43,27 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
     level: "かんたん", // Default
     gameCount: 3,
   });
-  const [, setSocket] = useAtom(socketAtom);
+  const [error, setError] = useState("");
+  const [socket, setSocket] = useAtom(socketAtom);
   const [, setGamePhase] = useAtom(gamePhaseAtom);
   const [, setRoomState] = useAtom(roomAtom);
   const [player, setPlayer] = useAtom(playerAtom);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { activeStep, onStepNext, onStepPrev } = useSteps({
+    index: 0,
+    count: steps.length,
+  });
+
+  const setPhraseAndNext = async (phrase: string) => {
+    if (!await existsPhrase(phrase)) {
+      setError("");
+      onStepNext();
+    } else {
+      setError("すでに使われているあいことばです")
+    }
+  };
 
   const handleSubmit = async () => {
     await fetch("/api/sockets", { method: "POST" });
@@ -51,8 +74,8 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
     socket.on("connect", () => {
       console.log(socket.id);
       setSocket(socket);
-      setPlayer({ ...player, id: socket.id || "" });
-      setRoomState({
+      setPlayer({ ...player, id: socket.id || "", name: playerName, isHost: true });
+      const room = {
         id: roomId,
         hostName: playerName,
         options: {
@@ -71,32 +94,12 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
             isHost: true,
           },
         ],
-      });
+      }
+      setRoomState(room);
       setGamePhase("matching");
-      // createRoom({
-      //   id: roomId,
-      //   hostName: playerName,
-      //   options: {
-      //     level: option.level,
-      //     gameCount: option.gameCount,
-      //   },
-      //   phrase: phrase,
-      // });
+      createRoom(room);
     });
   };
-
-  const steps: Steps = [
-    { title: "難易度", description: "" },
-    { title: "ゲーム数", description: "" },
-    { title: "あいことば", description: "" },
-  ];
-  const LEVEL = ["かんたん", "ふつう", "むずかしい"];
-  const GAME_COUNT = [1, 2, 3, 4, 5];
-
-  const { activeStep, onStepNext, onStepPrev } = useSteps({
-    index: 0,
-    count: steps.length,
-  });
 
   return (
     <>
@@ -151,13 +154,16 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
               </HStack>
             )}
             {activeStep === 2 && (
+              <>
               <Input
                 type="text"
                 required
                 placeholder="あいことばを入力"
                 value={phrase}
                 onChange={(e) => setPhrase(e.target.value)}
-              />
+                />
+                {error && <Heading size="sm" colorScheme="red">{error}</Heading>}
+                </>
             )}
             {activeStep === 3 && (
               <VStack>
@@ -188,6 +194,8 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
             onClick={() => {
               if (activeStep === 3) {
                 handleSubmit();
+              } else if (activeStep === 2) {
+                setPhraseAndNext(phrase);
               } else {
                 onStepNext();
               }

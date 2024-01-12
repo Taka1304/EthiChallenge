@@ -3,7 +3,7 @@ import React, { FC, useState } from "react";
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome";
 import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { useAtom } from "jotai";
-import { playerAtom } from "~/globalState/atoms";
+import { playerAtom, roomAtom, socketAtom } from "~/globalState/atoms";
 
 type Props = {
   player: Player;
@@ -13,11 +13,14 @@ const Player: FC<Props> = ({ player }) => {
   const [ready, setReady] = useState(false);
   const [image, setImage] = useState("/images/007.png");
 
+  const [socket, setSocket] = useAtom(socketAtom);
   const [playerState, setPlayerState] = useAtom(playerAtom);
+  const [roomState, setRoomState] = useAtom(roomAtom);
 
   const handleReady = () => {
     setReady(true);
-    setPlayerState({ ...playerState, ready: true });
+    setPlayerState({ ...playerState, ready: true, avatar: image });
+    socket.emit("changePlayerState", { ...playerState, ready: true, avatar: image }, roomState.id);
   };
   const handleImage = () => {
     const random = Math.floor(Math.random() * 23);
@@ -26,7 +29,7 @@ const Player: FC<Props> = ({ player }) => {
   if (player.id === "") {
     // 未参加のプレイヤー
     return (
-      <GridItem w="full" h="4xs" rounded="md" border="dashed" minH="xs" >
+      <GridItem w="full" rounded="md" border="dashed" minH="xs" >
         <Center h="full" flexDirection="column">
           <Heading as="h2" size="sm">
             プレイヤーの参加を<br />待っています...
@@ -37,7 +40,7 @@ const Player: FC<Props> = ({ player }) => {
     );
   }
   return (
-    <GridItem w="full" h="4xs" rounded="md" minH="xs">
+    <GridItem w="full" rounded="md" minH="xs">
       <Heading>{player.name}</Heading>
       <Box position="relative" maxW="100%">
         <Image w="100%" src={image} alt={`Player Avatar ${image}`} />

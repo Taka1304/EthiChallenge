@@ -38,21 +38,25 @@ export default function SocketHandler(
       socket.join(data.id);
     });
 
+    // ルームに参加したら、同ルーム内の全クライアントに送信する
     socket.on("joinRoom", (data: Room) => {
       console.log("Received join-room:", data);
       socket.join(data.id);
+      socket.to(data.id).emit("joinNewPlayer", data);
     });
     // メッセージを受信したら、同ルーム内の全クライアントに送信する
     socket.on("message", (data: Message) => {
-      // ルーム内の自分以外のクライアントに送信する
-      socket.broadcast.to(data.roomId).emit("message", data.message);
-      // io.to(data.roomId).emit('message', data.message);
       console.log("Received message:", data);
+    });
+    
+    socket.on("startGame", (data: Room) => {
+      console.log("Received startGame:", data);
+      socket.to(data.id).emit("startGame", data);
     });
 
     socket.on("changePlayerState", (data: Player, roomId: string) => {
-      console.log("Received changePlayerState:", data);
-      socket.broadcast.to(roomId).emit("changePlayerState", data);
+      console.log("Received changePlayerState:", data, roomId);
+      socket.to(roomId).emit("updatePlayerState", data);
     });
 
     // クライアントが切断した場合の処理

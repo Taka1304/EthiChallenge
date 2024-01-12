@@ -3,7 +3,7 @@
 import { Box } from "@yamada-ui/react";
 import { useAtom } from "jotai";
 import React from "react";
-import { io, Socket } from "socket.io-client";
+import { io } from "socket.io-client";
 import MatchingLayout from "~/components/matching/MatchingLayout";
 import TopLayout from "~/components/top/TopLayout";
 import { gamePhaseAtom } from "~/globalState/atoms";
@@ -13,7 +13,7 @@ export default function Home() {
   console.log(gamePhase);
   return (
     <Box w="full" h="full" p="md" display="flex" justifyContent="center">
-      <Box maxW="4xl">
+      <Box maxW="6xl">
         <Box
           gap="md"
           h="full"
