@@ -57,11 +57,11 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
   });
 
   const setPhraseAndNext = async (phrase: string) => {
-    if (!await existsPhrase(phrase)) {
+    if (!(await existsPhrase(phrase))) {
       setError("");
       onStepNext();
     } else {
-      setError("すでに使われているあいことばです")
+      setError("すでに使われているあいことばです");
     }
   };
 
@@ -74,7 +74,12 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
     socket.on("connect", () => {
       console.log(socket.id);
       setSocket(socket);
-      setPlayer({ ...player, id: socket.id || "", name: playerName, isHost: true });
+      setPlayer({
+        ...player,
+        id: socket.id || "",
+        name: playerName,
+        isHost: true,
+      });
       const room = {
         id: roomId,
         hostName: playerName,
@@ -87,14 +92,14 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
           {
             name: playerName,
             id: socket.id || "",
-            avatar: "",
+            avatar: "/images/000.png",
             scores: [],
             answers: [],
             ready: false,
             isHost: true,
           },
         ],
-      }
+      };
       setRoomState(room);
       setGamePhase("matching");
       createRoom(room);
@@ -155,15 +160,19 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
             )}
             {activeStep === 2 && (
               <>
-              <Input
-                type="text"
-                required
-                placeholder="あいことばを入力"
-                value={phrase}
-                onChange={(e) => setPhrase(e.target.value)}
+                <Input
+                  type="text"
+                  required
+                  placeholder="あいことばを入力"
+                  value={phrase}
+                  onChange={(e) => setPhrase(e.target.value)}
                 />
-                {error && <Heading size="sm" colorScheme="red">{error}</Heading>}
-                </>
+                {error && (
+                  <Heading size="sm" colorScheme="red">
+                    {error}
+                  </Heading>
+                )}
+              </>
             )}
             {activeStep === 3 && (
               <VStack>

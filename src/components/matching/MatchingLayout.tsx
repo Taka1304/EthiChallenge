@@ -1,7 +1,12 @@
 import { Box, Button, Grid, HStack, Heading, Spacer } from "@yamada-ui/react";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
-import { gamePhaseAtom, playerAtom, roomAtom, socketAtom } from "~/globalState/atoms";
+import {
+  gamePhaseAtom,
+  playerAtom,
+  roomAtom,
+  socketAtom,
+} from "~/globalState/atoms";
 import PlayerAvatar from "./Player";
 import { io } from "socket.io-client";
 
@@ -10,9 +15,9 @@ const MatchingLayout = () => {
   const [roomState, setRoomState] = useAtom(roomAtom);
   const [playerState, setPlayerState] = useAtom(playerAtom);
   const [, setGamePhase] = useAtom(gamePhaseAtom);
-  
+
   const initSocket = async () => {
-    console.log(socket)
+    console.log(socket);
 
     socket.on("updatePlayerState", (data: Player) => {
       console.log("updatePlayerState", data);
@@ -48,49 +53,49 @@ const MatchingLayout = () => {
     initSocket();
   }, []);
 
-  console.log("roomState", roomState)
-  console.log("playerState", playerState)
+  console.log("roomState", roomState);
+  console.log("playerState", playerState);
 
   const handleDisconnect = () => {
     socket.disconnect();
     setSocket(io({ autoConnect: false }));
     setGamePhase("normal");
-  }
+  };
 
   return (
     <Box textAlign="center" display="flex" flexDirection="column" gap="xl">
       <Heading>このルームのあいことば: {roomState.phrase}</Heading>
       <Grid templateColumns="repeat(4, 1fr)" gap="md">
         {roomState.players.map((player) => (
-          <PlayerAvatar key={player.id} player={player}/>
-          ))}
+          <PlayerAvatar key={player.id} player={player} />
+        ))}
         {roomState.players.length < 4 && (
           <>
             {[...Array(4 - roomState.players.length)].map((_, index) => (
               <PlayerAvatar
-              key={`placeholder-${index}`}
-              player={{
-                id: "",
-                avatar: "",
-                name: "",
-                scores: [],
-                answers: [],
-                ready: false,
-                isHost: false,
-              }}
+                key={`placeholder-${index}`}
+                player={{
+                  id: "",
+                  avatar: "",
+                  name: "",
+                  scores: [],
+                  answers: [],
+                  ready: false,
+                  isHost: false,
+                }}
               />
             ))}
           </>
         )}
       </Grid>
       <HStack>
-        <Button onClick={handleDisconnect}>
-          部屋から抜ける
-        </Button>
+        <Button onClick={handleDisconnect}>部屋から抜ける</Button>
         <Spacer />
-        {playerState.isHost && <Button onClick={() => socket.emit("startGame", roomState.id)}>
-          ゲームを開始する
-        </Button>}
+        {playerState.isHost && (
+          <Button onClick={() => socket.emit("startGame", roomState.id)}>
+            ゲームを開始する
+          </Button>
+        )}
       </HStack>
     </Box>
   );

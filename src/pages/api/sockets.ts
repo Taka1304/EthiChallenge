@@ -48,15 +48,16 @@ export default function SocketHandler(
     socket.on("message", (data: Message) => {
       console.log("Received message:", data);
     });
-    
+
     socket.on("startGame", (data: Room) => {
       console.log("Received startGame:", data);
       socket.to(data.id).emit("startGame", data);
     });
 
     socket.on("changePlayerState", (data: Player, roomId: string) => {
+      console.log("rooms: ", socket.rooms);
       console.log("Received changePlayerState:", data, roomId);
-      socket.to(roomId).emit("updatePlayerState", data);
+      io.to(roomId).emit("updatePlayerState", data);
     });
 
     // クライアントが切断した場合の処理
