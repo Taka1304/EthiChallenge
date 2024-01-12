@@ -20,9 +20,11 @@ import React, { useState } from "react";
 
 export default function Home() {
   return (
-    <Box w="full" h="full" p="md" display="flex" justifyContent="center">
+    <Box w="full" h="full" p="md" display="flex" justifyContent="center" marginBottom={"0px"} paddingBottom={"0px"}>
       <Box
         maxW="4xl"
+        marginBottom={"0px"}
+        paddingBottom={"0px"}
       >
         {/* <Box
           gap="md"
@@ -42,6 +44,7 @@ export default function Home() {
               borderRadius="50"
               paddingEnd="30"
               paddingStart="30"
+              boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
             >
               <Heading
                 as="h3"
@@ -53,8 +56,12 @@ export default function Home() {
             justifyContent="flex-end"
             h="3rem"
           >
-            <Link href="">ランキング</Link>
-            <Link href="">アチーブメント</Link>
+            <Link href=""
+              fontWeight={"bold"}
+            >ランキング</Link>
+            <Link href=""
+              fontWeight={"bold"}
+            >アチーブメント</Link>
           </HStack>
         </VStack>
         {/* END */}
@@ -74,7 +81,9 @@ export default function Home() {
                 <Heading>新感覚型対戦ゲーム</Heading>
               </Box>
               {/* リンク系はどうすればいいかわからないのでお願いします！ 一応Buttonにしておきました！ */}
-              <Box>
+              <Box
+                textAlign={"left"}
+              >
                 <Button
                   paddingStart="2rem"
                   paddingEnd="2rem"
@@ -85,6 +94,7 @@ export default function Home() {
                   borderWidth="100px"
                   border={"0.5px solid black"}
                   boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+                  w={"20%"}
                 >対戦する</Button>
               </Box>
             </VStack>
@@ -113,6 +123,7 @@ export default function Home() {
                 fontSize="2rem"
                 paddingTop="1rem"
                 paddingBottom="1rem"
+                boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
               >アプリ名</Heading>
               {/* 枠が横に伸びちゃうのを何とかしたい */}
             </Box>
@@ -131,9 +142,14 @@ export default function Home() {
                 </Text>
               </Container>
             </Box>
-            <GridItem
-              area="image" w="full" minH="4xs" rounded="md" bg="primary"
-            >ハートマークの画像が入る(ぎゅーっとなってるのは画像入れたら改善される、、はず)</GridItem>
+            <Image
+              gridArea="image"
+              src="images/home-003.png"
+              h={"250px"}
+              w={"250px"}
+              bg={"pink.100"}
+              borderRadius={"50%"}
+            />
 
           </Grid>
         </Container>
@@ -159,26 +175,58 @@ export default function Home() {
             borderRadius={"45"}
           >
             {/* キャッチコピーと画像 */}
-            <Grid templateAreas={`
-            "one two"
-            `}>
-              <Box
-                gridArea="one"
-                bg="blue"
-                marginLeft={"0px"}
-                paddingLeft={"0px"}
-              >
-                <Text>クイズを通して道徳を学び、</Text>
-                <Text>道徳的考え方を身に着けよう</Text>
+            {/* START */}
+            <Box>
+              <Grid templateAreas={`
+              "one two"
+              `}>
+                <Box
+                  gridArea="one"
+                  marginLeft={"0px"}
+                  padding={"10px 20px "}
+                  color={"white"}
+                >
+                  <Heading
+                    bg={"black"}
+                    fontSize={"1.2rem"}
+                    borderRightRadius={"20"}
+                    paddingTop={"15px"}
+                    paddingBottom={"15px"}
+                    paddingLeft={"10px"}
+                    marginTop={"30px"}
+                    marginBottom={"30px"}
+                  >クイズを通して道徳を学び、</Heading>
+                  <Spacer />
+                  <Heading
+                    bg={"black"}
+                    fontSize={"1.2rem"}
+                    paddingTop={"10px"}
+                    paddingBottom={"10px"}
+                    paddingLeft={"10px"}
+                    borderRightRadius={"20"}
+                  >道徳的考え方を身に着けよう</Heading>
+                </Box>
+                <Box
+                  gridArea="two"
+                >
+                  <Image
+                    bg={'white'}
+                    src="/images/home-004.png"
+                    margin={"40px"}
+                    marginRight={"10px"}
+                    borderRadius={"20"}
+                    h={"300px"}
+                    w={"300px"}
+                  />
+                </Box>
 
-              </Box>
-              <Box gridArea="two">
-                <GridItem w="full" />
-              </Box>
+              </Grid>
 
-            </Grid>
+            </Box>
+            {/* END */}
 
             {/* まる３つの部分 */}
+            {/* START */}
             <Grid templateAreas={`
             "one two three"
             `}>
@@ -191,7 +239,6 @@ export default function Home() {
                 // border={"0.5px solid black"}
                 boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
               >
-
               </Box>
 
               <Box
@@ -217,6 +264,20 @@ export default function Home() {
 
               </Box>
             </Grid>
+            <Box
+              textAlign={"center"}
+            >
+
+              <Button
+                bg={"#f36304"}
+                borderRadius={"70"}
+                w={"30%"}
+                border={"0.5px solid black"}
+                boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+              >
+                対戦する
+              </Button>
+            </Box>
           </Container>
         </Box>
         {/* END */}
@@ -234,24 +295,33 @@ export default function Home() {
           >
             みんなで一緒に、道徳心を身につけませんか？
           </Heading>
+          <Container
+            textAlign={"center"}
+            fontWeight={"bold"}
+          >
+            <Text>
+              アプリ名、は小学生から中学生を対象に、<br />
+              対戦型クイズ形式で道徳を教育する場を提供しています。
+            </Text>
+            <Text>
+              このクイズを通して、学んだことが将来役に立つかもしれません。
+            </Text>
+            <Text>
+              さぁ、みんなで現在の自分の道徳力を試してみよう。
+            </Text>
+          </Container>
         </Box>
         {/* END */}
 
+        <Box
+          marginTop={"200px"}
+          marginBottom={"0px"}
+          borderTopRadius={"30"}
+          bgGradient="linear(to-b, #ff6500, #fdbd93)"
+          h={"200px"}
+        >
+        </Box>
 
-        <Container>
-
-          <Heading>ルール</Heading>
-          <Text>
-            今回のアプリケーションは、小中学生を対象とした道徳教育を行うため、生成AIを使用した道徳クイズの対戦型ゲームです。
-
-            プレイヤーはAIが作成したお題を元に、どういった行動を取るか文書で回答します。
-
-            回答はAIによる採点にかけれられ、より道徳的な行動ができているプレイヤーに高い得点が与えられます。
-            また、同時にAIによる模範解答が示され、道徳的により良い行動とは何かを知ることができます。
-
-            これを繰り返し行い、最終的に最も道徳的なプレイヤーを決めます。
-          </Text>
-        </Container>
       </Box >
     </Box >
   );
