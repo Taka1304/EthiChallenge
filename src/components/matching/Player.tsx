@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Image, Loading } from "@yamada-ui/react";
+import { Box, Button, Center, GridItem, Heading, Image, Loading } from "@yamada-ui/react";
 import React, { FC, useState } from "react";
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome";
 import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
@@ -26,16 +26,18 @@ const Player: FC<Props> = ({ player }) => {
   if (player.id === "") {
     // 未参加のプレイヤー
     return (
-      <Box>
-        <Heading as="h2" size="sm">
-          プレイヤーの参加を待っています...
-        </Heading>
-        <Loading variant="dots" size="6xl" color="green.500" />
-      </Box>
+      <GridItem w="full" h="4xs" rounded="md" border="dashed" minH="xs" >
+        <Center h="full" flexDirection="column">
+          <Heading as="h2" size="sm">
+            プレイヤーの参加を<br />待っています...
+          </Heading>
+          <Loading variant="dots" size="6xl" color="green.500" />
+        </Center>
+      </GridItem>
     );
   }
   return (
-    <Box maxW="md" display="flex" flexDirection="column" alignItems="center">
+    <GridItem w="full" h="4xs" rounded="md" minH="xs">
       <Heading>{player.name}</Heading>
       <Box position="relative" maxW="100%">
         <Image w="100%" src={image} alt={`Player Avatar ${image}`} />
@@ -55,15 +57,15 @@ const Player: FC<Props> = ({ player }) => {
           <Button onClick={handleReady}>準備完了</Button>
         </>
       ) : (
-        <>
+        <Box h="full">
           {ready ? (
             <Heading size="xs">準備完了</Heading>
           ) : (
             <Heading size="xs">準備中...</Heading>
           )}
-        </>
+        </Box>
       )}
-    </Box>
+    </GridItem>
   );
 };
 

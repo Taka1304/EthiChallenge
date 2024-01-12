@@ -1,4 +1,4 @@
-import { Box, HStack, Heading } from "@yamada-ui/react";
+import { Box, Grid, HStack, Heading } from "@yamada-ui/react";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
 import { playerAtom, roomAtom, socketAtom } from "~/globalState/atoms";
@@ -39,31 +39,31 @@ const MatchingLayout = () => {
     };
   }, [playerState]);
   return (
-    <Box>
+    <Box textAlign="center">
       <Heading>このルームのあいことば: {roomState.phrase}</Heading>
-      <HStack>
+      <Grid templateColumns="repeat(4, 1fr)" gap="md">
         {roomState.players.map((player) => (
           <PlayerAvatar key={player.id} player={player}></PlayerAvatar>
-        ))}
+          ))}
         {roomState.players.length < 4 && (
           <>
             {[...Array(4 - roomState.players.length)].map((_, index) => (
               <PlayerAvatar
-                key={`placeholder-${index}`}
-                player={{
-                  id: "",
-                  avatar: "",
-                  name: "",
-                  scores: [],
-                  answers: [],
-                  ready: false,
-                  isHost: false,
-                }}
+              key={`placeholder-${index}`}
+              player={{
+                id: "",
+                avatar: "",
+                name: "",
+                scores: [],
+                answers: [],
+                ready: false,
+                isHost: false,
+              }}
               ></PlayerAvatar>
-            ))}
+              ))}
           </>
         )}
-      </HStack>
+      </Grid>
     </Box>
   );
 };
