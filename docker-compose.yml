@@ -8,16 +8,16 @@ services:
       - "3001:3000"
     env_file:
       - .env.local
-    volumes:
-      - node_modules:/app/node_modules
-      - ./public:/app/public
-      - ./src:/app/src
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app/
+        - action: rebuild
+          path: ./package.json
     # ホットリロード
     environment:
       - WATCHPACK_POLLING=true
-    restart: always
     tty: true
-    stdin_open: true
+    command: pnpm dev
 
-volumes:
-  node_modules:
