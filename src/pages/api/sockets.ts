@@ -55,7 +55,7 @@ export default function SocketHandler(
       console.log("Received startGame:", room);
       io.to(room.id).emit("startGame", room);
 
-      const question = await makeQuestion(room.options.level)
+      const question = await makeQuestion(room.options.level);
       io.to(room.id).emit("question", question);
     });
 

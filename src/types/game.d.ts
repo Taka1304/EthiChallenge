@@ -1,9 +1,4 @@
-type GamePhase =
-  | "normal"
-  | "matching"
-  | "game"
-  | "result"
-  | "finalResult"
+type GamePhase = "normal" | "matching" | "game" | "result" | "finalResult";
 
 type GameLevel = "かんたん" | "ふつう" | "むずかしい";
 

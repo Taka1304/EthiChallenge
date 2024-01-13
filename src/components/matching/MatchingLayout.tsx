@@ -13,33 +13,33 @@ import { io } from "socket.io-client";
 const MatchingLayout = () => {
   const [socket, setSocket] = useAtom(socketAtom);
   const [roomState, setRoomState] = useAtom(roomAtom);
-  const [playerState,] = useAtom(playerAtom);
+  const [playerState] = useAtom(playerAtom);
   const [, setGamePhase] = useAtom(gamePhaseAtom);
 
-  const initSocket = async () => {
-    console.log(socket);
-
-    socket.on("updatePlayerState", (data: Room) => {
-      console.log("updatePlayerState", data);
-      setRoomState(data)
-    });
-    socket.on("joinNewPlayer", (data: Room) => {
-      console.log("joinNewPlayer", data);
-      setRoomState(data);
-    });
-    socket.on("startGame", (room: Room) => {
-      console.log("startGame", room);
-      setGamePhase("game");
-    });
-    socket.on("disconnect", () => {
-      // TODO: 切断時のRedis、RoomState更新処理
-      console.log("disconnect");
-      setGamePhase("normal");
-    });
-  };
-
   useEffect(() => {
+    const initSocket = async () => {
+      console.log(socket);
+
+      socket.on("updatePlayerState", (data: Room) => {
+        console.log("updatePlayerState", data);
+        setRoomState(data);
+      });
+      socket.on("joinNewPlayer", (data: Room) => {
+        console.log("joinNewPlayer", data);
+        setRoomState(data);
+      });
+      socket.on("startGame", (room: Room) => {
+        console.log("startGame", room);
+        setGamePhase("game");
+      });
+      socket.on("disconnect", () => {
+        // TODO: 切断時のRedis、RoomState更新処理
+        console.log("disconnect");
+        setGamePhase("normal");
+      });
+    };
     initSocket();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log("roomState", roomState);
@@ -81,11 +81,11 @@ const MatchingLayout = () => {
         <Button onClick={handleDisconnect}>部屋から抜ける</Button>
         <Spacer />
         {playerState.isHost && (
-          <Button 
+          <Button
             onClick={() => socket.emit("startGame", roomState)}
             colorScheme="orange"
             disabled={!roomState.players.every((player) => player.ready)}
-            >
+          >
             ゲームを開始する
           </Button>
         )}

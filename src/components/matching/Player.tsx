@@ -20,9 +20,9 @@ type Props = {
 const Player: FC<Props> = ({ player }) => {
   const [image, setImage] = useState("/images/000.png");
 
-  const [socket, ] = useAtom(socketAtom);
+  const [socket] = useAtom(socketAtom);
   const [playerState, setPlayerState] = useAtom(playerAtom);
-  const [roomState, ] = useAtom(roomAtom);
+  const [roomState] = useAtom(roomAtom);
 
   const handleReady = () => {
     setPlayerState({ ...playerState, ready: true, avatar: image });
