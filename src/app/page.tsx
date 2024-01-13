@@ -89,7 +89,7 @@ export default function Home() {
               <Link href="/gameplay">
                 <Box
                   textAlign={"left"}
-                  >
+                >
                   <Button
                     paddingStart="2rem"
                     paddingEnd="2rem"
@@ -101,7 +101,7 @@ export default function Home() {
                     border={"0.5px solid black"}
                     boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
                     w={"20%"}
-                    >対戦する</Button>
+                  >対戦する</Button>
                 </Box>
               </Link>
             </VStack>
@@ -138,6 +138,7 @@ export default function Home() {
             <Box gridArea="text">
               <Container
                 fontWeight="bold"
+                fontSize={"1.2rem"}
               >
                 <Text>
                   善悪を判断して善を行おうとする心<br />
@@ -149,15 +150,25 @@ export default function Home() {
                 </Text>
               </Container>
             </Box>
-            <Image
+            <Box
               gridArea="image"
-              src="/images/home-003.png"
-              alt="/images/home-003.png"
               h={"250px"}
               w={"250px"}
-              bg={"pink.100"}
               borderRadius={"50%"}
-            />
+              bgGradient="linear(to-b, #ff5a00, #ffaa8c)"
+              // bg={"#ff5900"}
+              bg={"#ffaa8e"}
+            >
+
+              <Image
+                gridArea="image"
+                src="/images/home-003.png"
+                alt="/images/home-003.png"
+                h={"250px"}
+                w={"250px"}
+                borderRadius={"50%"}
+              />
+            </Box>
 
           </Grid>
         </Container>
@@ -299,16 +310,18 @@ export default function Home() {
             <Box
               textAlign={"center"}
             >
+              <Link href="/gameplay">
 
-              <Button
-                bg={"#f36304"}
-                borderRadius={"70"}
-                w={"30%"}
-                border={"0.5px solid black"}
-                boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
-              >
-                対戦する
-              </Button>
+                <Button
+                  bg={"#f36304"}
+                  borderRadius={"70"}
+                  w={"30%"}
+                  border={"0.5px solid black"}
+                  boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+                >
+                  対戦する
+                </Button>
+              </Link>
             </Box>
           </Container>
         </Box>
