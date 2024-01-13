@@ -10,8 +10,8 @@ import {
   Legend,
   ArcElement,
 } from 'chart.js';
-import { Bar, Pie } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker'
+import { Bar } from 'react-chartjs-2'; // グラフを表示するためのライブラリ
+import { faker } from '@faker-js/faker' // ダミーデータを作るためのライブラリ
 
 import {
   Box,
@@ -30,13 +30,16 @@ ChartJS.register(
   ArcElement,
 );
 
-export default function Home() {
+export default function Result() {
+  // ダミーデータ
+  const barColor = "rgba(252, 159, 50, 1)";
+
   const data = {
     labels: ["Player1", "Player2", "Player3"],
     datasets: [
       {
-        label: "ランキング",
-        data: [12, 19, 3, 5, 2, 3],
+        label: "得点",
+        data: [90, 30, 50],
         backgroundColor: [
           "rgba(252, 159, 50, 1)",
           "rgba(252, 159, 50, 1)",
@@ -51,10 +54,35 @@ export default function Home() {
       },
     ],
   };
+  // グラフのオプション、目盛りを消したりする
+  const options = {
+    scales: {
+      y: {
+        min: 0,
+        max: 100, // 得点の最大値を入れる
+        ticks: {
+          stepsize: 10, // 目盛りの間隔
+          display: false, // 目盛りを消す
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false, // 凡例を非表示
+      },
+      tooltip: {
+        enabled: false, // ツールチップを非表示
+      },
+      customRank: {
+        position: 'center', // 順位表示をバーの中心に配置
+      },
+    }
+  };
+
 
   return (
     <Box
-      bgGradient="linear(to-t, #ffd2b5, #ff812e)"
+      bgGradient="linear(to-t, #ffffff, #ff812e)"
 
       // 大きさを部ライザの最大値にする
       w={"100vw"}
@@ -70,7 +98,10 @@ export default function Home() {
       <Box
         marginBottom={"5vh"}
       >
-        <Link>
+        {/* ここ変更お願いします、ブラウザ終了をするわけじゃないから、Button */}
+        <Link
+          href=''
+        >
           <Button
             bg={"#ffaa8c"}
           >
@@ -88,6 +119,7 @@ export default function Home() {
       >
         <Bar
           data={data}
+          options={options}
         ></Bar>
       </Box>
       {/* END */}
@@ -97,7 +129,10 @@ export default function Home() {
       <Box
         marginBottom={"5vh"}
       >
-        <Link>
+        {/* ここ変更お願いしますゲームの開始画面へのリンクになると思います */}
+        <Link
+          href=''
+        >
           <Button
             bg={"#ffaa8c"}
           >
