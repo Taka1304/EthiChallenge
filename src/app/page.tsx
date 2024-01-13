@@ -6,6 +6,7 @@ import {
   Heading,
   VStack,
   HStack,
+  ZStack,
   Link as UILink,
   Container,
   Button,
@@ -20,7 +21,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <Box w="full" h="full" p="md" display="flex" justifyContent="center" marginBottom={"0px"} paddingBottom={"0px"}>
+    <Box w="full" h="full" p="md" display="flex" justifyContent="center" marginBottom={"0px"} paddingBottom={"0px"} bg="#ffffff">
       <Box
         maxW="4xl"
         marginBottom={"0px"}
@@ -76,20 +77,52 @@ export default function Home() {
           bg="orange"
           bgGradient="linear(to-b, #ff812e, #ffffff)"
           borderRadius="30"
-          padding={10}
+          padding={'0'}
         >
-          <HStack>
-            <VStack>
-              <Box marginTop={"50px"} marginBottom={"30px"}>
-                <Heading>道徳心を試せ！！？</Heading>
-                <Heading>新感覚型対戦ゲーム</Heading>
+          <Grid
+            templateAreas={`
+            "one two"
+            `}
+          >
+            <VStack
+              gridArea={"one"}
+            >
+              <Box
+                marginTop={"50px"}
+                marginBottom={"30px"}>
+                <Box
+                  bg="white"
+                  textAlign={"center"}
+                  rounded={"10"}
+                  padding={"2% 5% 2% 5%"}
+                  margin={"7% 0% 5% 10%"}
+                  w={"90%"}
+                  boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+                >
+                  <Heading
+                    fontSize={"1.7rem"}
+                  >道徳心を試せ！！</Heading>
+                </Box>
+                <Box
+                  bg="white"
+                  textAlign={"center"}
+                  rounded={"10"}
+                  padding={"2% 10% 2% 10%"}
+                  margin={"5% 0% 5% 10%"}
+                  w={"110%"}
+                  boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+                >
+                  <Heading
+                    fontSize={"2rem"}
+                  >新感覚型対戦ゲーム</Heading>
+                </Box>
               </Box>
-              {/* リンク系はどうすればいいかわからないのでお願いします！ 一応Buttonにしておきました！ */}
               <Link href="/gameplay">
                 <Box
-                  textAlign={"left"}
+                  textAlign={"center"}
                 >
                   <Button
+                    margin={"5% 0% 10% 5%"}
                     paddingStart="2rem"
                     paddingEnd="2rem"
                     paddingTop="1.5rem"
@@ -99,13 +132,38 @@ export default function Home() {
                     borderWidth="100px"
                     border={"0.5px solid black"}
                     boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
-                    w={"20%"}
+                    w={"40%"}
                   >対戦する</Button>
                 </Box>
               </Link>
             </VStack>
-            {/* ここに画像が入るかも */}
-          </HStack>
+            <Box
+              gridArea={"two"}
+            >
+              <ZStack
+                direction="top-left"
+              >
+
+                {/* 画像 */}
+                <Image
+                  src="images/home-002.png"
+                  alt="images/home-002.png"
+                  w={"300px"}
+                ></Image>
+                <Spacer />
+                <Spacer />
+                <Spacer />
+                <Spacer />
+                <Spacer />
+                <Spacer />
+                <Image
+                  src="images/home-001.png"
+                  alt="images/home-001.png"
+                  w={"300px"}
+                ></Image>
+              </ZStack>
+            </Box>
+          </Grid>
         </Box>
         {/* END */}
 
@@ -176,7 +234,8 @@ export default function Home() {
         {/* 「-- アプリ名でできること -- 」と書かれている、ルール説明部分 */}
         {/* START */}
         <Box
-          marginTop={"150px"}
+          margin={"150px 0px 0px 0px"}
+          paddingLeft={"0px"}
         >
 
           <Divider />
@@ -191,38 +250,57 @@ export default function Home() {
             marginTop={"30px"}
             bgGradient="linear(to-b, #ffb07c, #fe8c66)"
             borderRadius={"45"}
+            paddingLeft={"0px"}
+            paddingRight={"0px"}
+            marginLeft={"0px"}
+            marginRight={"0px"}
+            textAlign={"center"}
           >
             {/* キャッチコピーと画像 */}
             {/* START */}
-            <Box>
+            <Box
+            >
               <Grid templateAreas={`
               "one two"
-              `}>
+              `}
+              >
                 <Box
                   gridArea="one"
                   marginLeft={"0px"}
-                  padding={"10px 20px "}
+                  paddingLeft={"0px"}
                   color={"white"}
                 >
-                  <Heading
+                  <Box
                     bg={"black"}
-                    fontSize={"1.2rem"}
+                    borderRightRadius={"20"}
+                    paddingTop={"15px"}
+                    paddingBottom={"15px"}
+                    marginTop={"40px"}
+                    marginBottom={"30px"}
+                    textAlign={"center"}
+                    w={"110%"}
+                    marginLeft={"0px"}
+                  >
+                    <Heading
+                      fontSize={"1.2rem"}
+                    >クイズを通して道徳を学び、</Heading>
+                  </Box>
+                  <Spacer />
+                  <Box
+                    bg={"black"}
                     borderRightRadius={"20"}
                     paddingTop={"15px"}
                     paddingBottom={"15px"}
                     paddingLeft={"10px"}
                     marginTop={"30px"}
                     marginBottom={"30px"}
-                  >クイズを通して道徳を学び、</Heading>
-                  <Spacer />
-                  <Heading
-                    bg={"black"}
-                    fontSize={"1.2rem"}
-                    paddingTop={"10px"}
-                    paddingBottom={"10px"}
-                    paddingLeft={"10px"}
-                    borderRightRadius={"20"}
-                  >道徳的考え方を身に着けよう</Heading>
+                    textAlign={"center"}
+                  >
+                    <Heading
+                      fontSize={"1.2rem"}
+                    >道徳的考え方を身に着けよう</Heading>
+                  </Box>
+
                 </Box>
                 <Box
                   gridArea="two"
@@ -245,67 +323,76 @@ export default function Home() {
 
             {/* まる３つの部分 */}
             {/* START */}
-            <Grid templateAreas={`
-            "one two three"
-            `}
-              fontWeight={"bold"}
+            <Box
+              margin={"0px"}
+              padding={"0px"}
             >
-              <Box
-                gridArea="one"
-                w="200px"
-                h="200px"
-                borderRadius={"50%"}
-                backgroundColor={"white"}
-                // border={"0.5px solid black"}
-                boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
-                display={"flex"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                textAlign={"center"}
-              >
-                <Text>
-                  回答をAIが<br />
-                  自動で採点
-                </Text>
-              </Box>
 
-              <Box
-                gridArea="two"
-                w="200px"
-                h="200px"
-                borderRadius={"50%"}
-                backgroundColor={"white"}
-                // border={"0.5px solid black"}
-                boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
-                display={"flex"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                textAlign={"center"}
+              <Grid templateAreas={`
+              "one two three"
+              `}
+                fontWeight={"bold"}
+                marginRight={"7%"}
+                marginLeft={"7%"}
               >
-                <Text>
-                  2人～4人<br />
-                  対戦
-                </Text>
-              </Box>
-              <Box
-                gridArea="three"
-                w="200px"
-                h="200px"
-                borderRadius={"50%"}
-                backgroundColor={"white"}
-                // border={"0.5px solid black"}
-                boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
-                display={"flex"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                textAlign={"center"}
-              >
-                <Text>
-                  模範解答<br />
-                  付き
-                </Text>
-              </Box>
-            </Grid>
+                <Box
+                  gridArea="one"
+                  w="200px"
+                  h="200px"
+                  borderRadius={"50%"}
+                  backgroundColor={"white"}
+                  // border={"0.5px solid black"}
+                  boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  textAlign={"center"}
+                >
+                  <Text>
+                    回答をAIが<br />
+                    自動で採点
+                  </Text>
+                </Box>
+
+                <Box
+                  gridArea="two"
+                  w="200px"
+                  h="200px"
+                  borderRadius={"50%"}
+                  backgroundColor={"white"}
+                  // border={"0.5px solid black"}
+                  boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  textAlign={"center"}
+                >
+                  <Text>
+                    2人～4人<br />
+                    対戦
+                  </Text>
+                </Box>
+                <Box
+                  gridArea="three"
+                  w="200px"
+                  h="200px"
+                  borderRadius={"50%"}
+                  backgroundColor={"white"}
+                  // border={"0.5px solid black"}
+                  boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  textAlign={"center"}
+                >
+                  <Text>
+                    模範解答<br />
+                    付き
+                  </Text>
+                </Box>
+              </Grid>
+
+            </Box>
             <Box
               textAlign={"center"}
             >
