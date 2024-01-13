@@ -12,7 +12,6 @@ import {
   Spacer,
   Image,
   Grid,
-  GridItem,
   Divider,
 } from "@yamada-ui/react";
 
