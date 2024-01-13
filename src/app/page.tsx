@@ -27,14 +27,6 @@ export default function Home() {
         marginBottom={"0px"}
         paddingBottom={"0px"}
       >
-        {/* <Box
-          gap="md"
-          h="full"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        > */}
 
         {/* 一番上のアプリ名を書く水平コンテナ部分 */}
         {/* START */}
@@ -57,6 +49,8 @@ export default function Home() {
             justifyContent="flex-end"
             h="3rem"
           >
+            {/* ランキング＆アチーブメントは削除 */}
+            {/* 
             <UILink href=""
               fontWeight={"bold"}
               textDecoration={"underline"}
@@ -67,6 +61,7 @@ export default function Home() {
               textDecoration={"underline"}
               color={"black"}
             >アチーブメント</UILink>
+            */}
           </HStack>
         </VStack>
         {/* END */}
