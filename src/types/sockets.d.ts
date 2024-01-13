@@ -4,15 +4,6 @@ type Message = {
   message: string;
 };
 
-type Room = {
-  id: string;
-  hostName: string;
-  phrase: string;
-  players: Player[];
-  // questions: string[];
-  options: Option;
-};
-
 type CreateRoom = {
   id: string; //uuid
   hostname: string;

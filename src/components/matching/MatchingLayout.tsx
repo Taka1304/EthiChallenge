@@ -68,6 +68,7 @@ const MatchingLayout = () => {
                   avatar: "",
                   name: "",
                   scores: [],
+                  feedbacks: [],
                   answers: [],
                   ready: false,
                   isHost: false,

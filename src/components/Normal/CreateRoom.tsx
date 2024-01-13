@@ -89,12 +89,14 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
           gameCount: option.gameCount,
         },
         phrase: phrase,
+        questions: [],
         players: [
           {
             name: playerName,
             id: socket.id || "",
             avatar: "/images/000.png",
             scores: [],
+            feedbacks: [],
             answers: [],
             ready: false,
             isHost: true,

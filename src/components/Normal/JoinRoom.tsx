@@ -46,6 +46,7 @@ const JoinRoom: FC<Props> = ({ playerName }) => {
         avatar: "/images/000.png",
         name: playerName || "Player",
         scores: [],
+        feedbacks: [],
         answers: [],
         ready: false,
         isHost: false,
