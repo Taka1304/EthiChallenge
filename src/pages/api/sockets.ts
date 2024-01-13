@@ -50,9 +50,9 @@ export default function SocketHandler(
       console.log("Received message:", data);
     });
 
-    socket.on("startGame", (data: Room) => {
-      console.log("Received startGame:", data);
-      socket.to(data.id).emit("startGame", data);
+    socket.on("startGame", (roomId: string) => {
+      console.log("Received startGame:", roomId);
+      io.to(roomId).emit("startGame", roomId);
     });
 
     socket.on("changePlayerState", (data: Player, room: Room) => {
