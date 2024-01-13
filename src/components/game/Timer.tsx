@@ -1,11 +1,12 @@
-import { Heading } from '@yamada-ui/react';
-import React, { useEffect, useState } from 'react';
+import { Heading } from "@yamada-ui/react";
+import { useState, useEffect } from "react";
 
 type TimerProps = {
   duration: number;
+  onTimerFinish?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Timer: React.FC<TimerProps> = ({ duration }) => {
+const Timer: React.FC<TimerProps> = ({ duration, onTimerFinish }) => {
   const [remainingTime, setRemainingTime] = useState(duration);
 
   useEffect(() => {
@@ -19,6 +20,8 @@ const Timer: React.FC<TimerProps> = ({ duration }) => {
 
       if (newTime > 0) {
         requestAnimationFrame(updateTimer);
+      } else if (onTimerFinish) {
+        onTimerFinish(true); // Pass the flag when the timer finishes
       }
     };
 
@@ -30,7 +33,11 @@ const Timer: React.FC<TimerProps> = ({ duration }) => {
   }, []);
 
   return (
-    <Heading as="p" fontFamily={"monospace"} color={remainingTime > 5 ? 'inherit' : 'red' }>
+    <Heading
+      as="p"
+      fontFamily={"monospace"}
+      color={remainingTime > 5 ? "inherit" : "red"}
+    >
       {remainingTime.toFixed(2)}
     </Heading>
   );
