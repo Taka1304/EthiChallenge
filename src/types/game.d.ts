@@ -1,7 +1,7 @@
 // game → playing にしよう
 type GamePhase = "normal" | "matching" | "game" | "result" | "finalResult";
 // TODO: 英語にする
-type GameLevel = "かんたん" | "ふつう" | "むずかしい";
+type GameLevel = "Easy" | "Normal" | "Hard";
 
 type Option = {
   level: GameLevel;
