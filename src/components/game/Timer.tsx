@@ -34,7 +34,7 @@ const Timer: React.FC<TimerProps> = ({ duration, onTimerFinish }) => {
 
   return (
     <Heading
-      as="p"
+      as="span"
       fontFamily={"monospace"}
       color={remainingTime > 5 ? "inherit" : "red"}
     >
