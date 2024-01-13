@@ -1,6 +1,6 @@
 "use client";
 
-import { Box } from "@yamada-ui/react";
+import { Box, Center } from "@yamada-ui/react";
 import { useAtom } from "jotai";
 import React from "react";
 import { io } from "socket.io-client";
@@ -13,21 +13,23 @@ export default function Home() {
   const [gamePhase] = useAtom(gamePhaseAtom);
   console.log(gamePhase);
   return (
-    <Box w="full" h="full" p="md" display="flex" justifyContent="center">
+    <Center w="full" h="100vh" p="md" overflowY="hidden" gap="4">
       <Box maxW="6xl">
         <Box
           gap="md"
-          h="full"
+          h="100vh"
+          w="full"
           display="flex"
           flexDirection="column"
           alignItems="center"
-          justifyContent="center"
+          justifyContent={"center"}
+          position={"relative"}
         >
           {gamePhase === "normal" && <NormalLayout />}
           {gamePhase === "matching" && <MatchingLayout />}
           {gamePhase === "game" && <GameLayout />}
         </Box>
       </Box>
-    </Box>
+    </Center>
   );
 }
