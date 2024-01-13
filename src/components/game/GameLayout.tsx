@@ -1,13 +1,13 @@
-import { Box, Center, Heading, Motion, ScrollArea, Textarea } from "@yamada-ui/react";
+import { Box, Center, Heading, Motion, ScaleFade, ScrollArea, Textarea, Text } from "@yamada-ui/react";
 import { useAtom } from "jotai";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { playerAtom, roomAtom, socketAtom } from "~/globalState/atoms";
 import Timer from "./Timer";
 
 const GameLayout = () => {
-  const [question, setQuestion] = React.useState<string>("");
-  const [answer, setAnswer] = React.useState<string>("");
-  const [end, setEnd] = React.useState(false);
+  const [question, setQuestion] = useState<string>("");
+  const [answer, setAnswer] = useState<string>("");
+  const [end, setEnd] = useState(false);
   
   const [socket] = useAtom(socketAtom);
   const [player, setPlayer] = useAtom(playerAtom);
@@ -33,6 +33,18 @@ const GameLayout = () => {
     <>
       {question ? (
         <>
+          <ScaleFade isOpen={end} position={"absolute"} >
+            <Text
+              w="full"
+              fontSize="8rem"
+              fontWeight="bold"
+              bgGradient="linear(to-l, #f97415, #ec4699)"
+              bgClip="text"
+              textAlign={"center"}
+            >
+              そこまで!
+            </Text>
+          </ScaleFade>
           <Motion
             animate={{
               scale: [1, 0.75],
@@ -123,11 +135,11 @@ const GameLayout = () => {
               rotate: [0, 0, 180, 180, 0],
               borderRadius: ["0%", "0%", "50%", "50%", "0%"],
               backgroundColor: [
-                "#FF008C",
-                "#FF008C",
-                "#FFBD00",
-                "#FFBD00",
-                "#FF008C",
+                "#ec4699",
+                "#ec4699",
+                "#f97415",
+                "#f97415",
+                "#ec4699",
               ],
             }}
             transition={{
