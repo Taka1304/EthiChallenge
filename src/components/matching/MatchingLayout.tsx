@@ -27,11 +27,12 @@ const MatchingLayout = () => {
       console.log("joinNewPlayer", data);
       setRoomState(data);
     });
-    socket.on("startGame", () => {
-      console.log("startGame");
+    socket.on("startGame", (roomId: string) => {
+      console.log("startGame", roomId);
       setGamePhase("waiting");
     });
     socket.on("disconnect", () => {
+      // TODO: 切断時のRedis、RoomState更新処理
       console.log("disconnect");
       setGamePhase("normal");
     });

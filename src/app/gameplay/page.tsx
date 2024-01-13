@@ -6,6 +6,7 @@ import React from "react";
 import { io } from "socket.io-client";
 import MatchingLayout from "~/components/matching/MatchingLayout";
 import TopLayout from "~/components/top/TopLayout";
+import WaitingLayout from "~/components/waiting/WaitingLayout";
 import { gamePhaseAtom } from "~/globalState/atoms";
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
         >
           {gamePhase === "normal" && <TopLayout />}
           {gamePhase === "matching" && <MatchingLayout />}
+          {gamePhase === "waiting" && <WaitingLayout />}
         </Box>
       </Box>
     </Box>
