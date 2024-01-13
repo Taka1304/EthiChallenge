@@ -1,4 +1,13 @@
-import { Box, Center, Heading, Motion, ScaleFade, ScrollArea, Textarea, Text } from "@yamada-ui/react";
+import {
+  Box,
+  Center,
+  Heading,
+  Motion,
+  ScaleFade,
+  ScrollArea,
+  Textarea,
+  Text,
+} from "@yamada-ui/react";
 import { useAtom } from "jotai";
 import React, { useEffect, useState } from "react";
 import { playerAtom, roomAtom, socketAtom } from "~/globalState/atoms";
@@ -8,16 +17,19 @@ const GameLayout = () => {
   const [question, setQuestion] = useState<string>("");
   const [answer, setAnswer] = useState<string>("");
   const [end, setEnd] = useState(false);
-  
+
   const [socket] = useAtom(socketAtom);
   const [player, setPlayer] = useAtom(playerAtom);
-  const [room, setRoom] = useAtom(roomAtom);
+  const [roomState, setRoomState] = useAtom(roomAtom);
 
   useEffect(() => {
     socket.on("question", (question: string) => {
       console.log("question", question);
       setQuestion(question);
-      setRoom({...room, questions: [...room.questions, question]});
+      setRoomState({
+        ...roomState,
+        questions: [...roomState.questions, question],
+      });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -25,7 +37,11 @@ const GameLayout = () => {
   useEffect(() => {
     if (end) {
       setPlayer({ ...player, answers: [...player.answers, answer] });
-      socket.emit("sendAnswer", player);
+      socket.emit(
+        "sendAnswer",
+        { ...player, answers: [...player.answers, answer] },
+        roomState,
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [end]);
@@ -33,7 +49,7 @@ const GameLayout = () => {
     <>
       {question ? (
         <>
-          <ScaleFade isOpen={end} position={"absolute"} >
+          <ScaleFade isOpen={end} position={"absolute"}>
             <Text
               w="full"
               fontSize="8rem"
@@ -57,7 +73,7 @@ const GameLayout = () => {
             }}
             position={"absolute"}
           >
-            <Heading size="4xl">{`第${room.questions.length}問`}</Heading>
+            <Heading size="4xl">{`第${roomState.questions.length}問`}</Heading>
           </Motion>
           <Box
             h="100vh"
@@ -80,8 +96,17 @@ const GameLayout = () => {
               }}
               opacity={0}
             >
-              <ScrollArea maxH="80" w="4xl" p="2" bg="blackAlpha.300" borderRadius="md" innerProps={{ as: Box, gap: "md" }}>
-                <Heading size="lg">{room.questions[room.questions.length - 1]}</Heading>
+              <ScrollArea
+                maxH="80"
+                w="4xl"
+                p="2"
+                bg="blackAlpha.300"
+                borderRadius="md"
+                innerProps={{ as: Box, gap: "md" }}
+              >
+                <Heading size="lg">
+                  {roomState.questions[roomState.questions.length - 1]}
+                </Heading>
               </ScrollArea>
             </Motion>
             <Motion
@@ -97,7 +122,7 @@ const GameLayout = () => {
               opacity={0}
             >
               <Heading size="lg">
-                制限時間: <Timer duration={60} onTimerFinish={setEnd} />
+                {!end && <Timer duration={60} onTimerFinish={setEnd} />}
               </Heading>
             </Motion>
             <Motion

@@ -56,7 +56,26 @@ export default function SocketHandler(
       io.to(room.id).emit("startGame", room);
 
       const question = await makeQuestion(room.options.level);
+      setRoom({ ...room, questions: [...room.questions, question] });
       io.to(room.id).emit("question", question);
+    });
+
+    // TODO: この処理がプレイヤー数回、繰り返されてしまう
+    socket.on("sendAnswer", (data: Player, room: Room) => {
+      console.log("Received answer:", data, room);
+      const updatedPlayers = room.players.map((player) => {
+        if (player.id === data.id) {
+          return data;
+        }
+        return player;
+      });
+      const updatedRoom: Room = {
+        ...room,
+        players: updatedPlayers,
+        phase: "result",
+      };
+      setRoom(updatedRoom);
+      io.to(room.id).emit("updatePlayerState", updatedRoom);
     });
 
     socket.on("changePlayerState", (data: Player, room: Room) => {
