@@ -5,6 +5,7 @@ import type { Socket as NetSocket } from "net";
 import type { Server as HttpServer } from "http";
 import { Server as SocketServer } from "socket.io";
 import { setRoom } from "~/app/gameplay/_room";
+import { makeQuestion } from "~/app/gameplay/_openai";
 
 // Next.jsの型定義を拡張してSocket.IOの型定義を追加
 type ResponseWebSocket = NextApiResponse & {
@@ -50,9 +51,12 @@ export default function SocketHandler(
       console.log("Received message:", data);
     });
 
-    socket.on("startGame", (roomId: string) => {
-      console.log("Received startGame:", roomId);
-      io.to(roomId).emit("startGame", roomId);
+    socket.on("startGame", async (room: Room) => {
+      console.log("Received startGame:", room);
+      io.to(room.id).emit("startGame", room);
+
+      const question = await makeQuestion(room.options.level)
+      io.to(room.id).emit("question", question);
     });
 
     socket.on("changePlayerState", (data: Player, room: Room) => {

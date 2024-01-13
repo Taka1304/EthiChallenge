@@ -1,11 +1,9 @@
 type GamePhase =
+  | "normal"
   | "matching"
-  | "waiting"
-  | "answer"
-  | "scoring"
+  | "game"
   | "result"
   | "finalResult"
-  | "normal";
 
 type GameLevel = "かんたん" | "ふつう" | "むずかしい";
 
@@ -30,5 +28,5 @@ type Scores = {
   empathy: number; // 共感力
   socialResponsibility: number; // 社会的責任
   selfKnowledge: number; // 自己認識
-  generalEvaluation: number; // 総合評価
+  total: number; // 総合評価
 };

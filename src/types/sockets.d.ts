@@ -9,6 +9,7 @@ type Room = {
   hostName: string;
   phrase: string;
   players: Player[];
+  // questions: string[];
   options: Option;
 };
 

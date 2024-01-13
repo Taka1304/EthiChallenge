@@ -27,9 +27,9 @@ const MatchingLayout = () => {
       console.log("joinNewPlayer", data);
       setRoomState(data);
     });
-    socket.on("startGame", (roomId: string) => {
-      console.log("startGame", roomId);
-      setGamePhase("waiting");
+    socket.on("startGame", (room: Room) => {
+      console.log("startGame", room);
+      setGamePhase("game");
     });
     socket.on("disconnect", () => {
       // TODO: 切断時のRedis、RoomState更新処理
@@ -82,7 +82,7 @@ const MatchingLayout = () => {
         <Spacer />
         {playerState.isHost && (
           <Button 
-            onClick={() => socket.emit("startGame", roomState.id)}
+            onClick={() => socket.emit("startGame", roomState)}
             colorScheme="orange"
             disabled={!roomState.players.every((player) => player.ready)}
             >
