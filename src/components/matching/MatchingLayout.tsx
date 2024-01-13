@@ -1,12 +1,7 @@
 import { Box, Button, Grid, HStack, Heading, Spacer } from "@yamada-ui/react";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
-import {
-  gamePhaseAtom,
-  playerAtom,
-  roomAtom,
-  socketAtom,
-} from "~/globalState/atoms";
+import { playerAtom, roomAtom, socketAtom } from "~/globalState/atoms";
 import PlayerAvatar from "./Player";
 import { io } from "socket.io-client";
 
@@ -14,7 +9,6 @@ const MatchingLayout = () => {
   const [socket, setSocket] = useAtom(socketAtom);
   const [roomState, setRoomState] = useAtom(roomAtom);
   const [playerState] = useAtom(playerAtom);
-  const [, setGamePhase] = useAtom(gamePhaseAtom);
 
   useEffect(() => {
     const initSocket = async () => {
@@ -30,12 +24,12 @@ const MatchingLayout = () => {
       });
       socket.on("startGame", (room: Room) => {
         console.log("startGame", room);
-        setGamePhase("game");
+        setRoomState({ ...roomState, phase: "game" });
       });
       socket.on("disconnect", () => {
         // TODO: 切断時のRedis、RoomState更新処理
         console.log("disconnect");
-        setGamePhase("normal");
+        setRoomState({ ...roomState, phase: "normal" });
       });
     };
     initSocket();
@@ -48,7 +42,7 @@ const MatchingLayout = () => {
   const handleDisconnect = () => {
     socket.disconnect();
     setSocket(io({ autoConnect: false }));
-    setGamePhase("normal");
+    setRoomState({ ...roomState, phase: "normal" });
   };
 
   return (
@@ -83,7 +77,9 @@ const MatchingLayout = () => {
         <Spacer />
         {playerState.isHost && (
           <Button
-            onClick={() => socket.emit("startGame", roomState)}
+            onClick={() =>
+              socket.emit("startGame", { ...roomState, phase: "game" } as Room)
+            }
             colorScheme="orange"
             disabled={!roomState.players.every((player) => player.ready)}
           >

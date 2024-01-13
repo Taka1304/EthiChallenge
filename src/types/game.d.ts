@@ -7,7 +7,13 @@ type Option = {
   gameCount: number;
 };
 
-type Evaluation = 'theoreticalJudgement' | 'moralReasoning' | 'empathy' | 'socialResponsibility' | 'selfKnowledge' | 'total';
+type Evaluation =
+  | "theoreticalJudgement"
+  | "moralReasoning"
+  | "empathy"
+  | "socialResponsibility"
+  | "selfKnowledge"
+  | "total";
 
 type Feedbacks = {
   [key in Evaluation]: string;
@@ -32,6 +38,7 @@ type Room = {
   id: string;
   hostName: string;
   phrase: string;
+  phase: GamePhase;
   players: Player[];
   questions: string[];
   options: Option;

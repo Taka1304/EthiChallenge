@@ -7,11 +7,11 @@ import { io } from "socket.io-client";
 import MatchingLayout from "~/components/matching/MatchingLayout";
 import NormalLayout from "~/components/Normal/NormalLayout";
 import GameLayout from "~/components/game/GameLayout";
-import { gamePhaseAtom } from "~/globalState/atoms";
+import { roomAtom } from "~/globalState/atoms";
 
-export default function Home() {
-  const [gamePhase] = useAtom(gamePhaseAtom);
-  console.log(gamePhase);
+export default function Game() {
+  const [room] = useAtom(roomAtom);
+
   return (
     <Center w="full" h="100vh" p="md" overflowY="hidden" gap="4">
       <Box maxW="6xl">
@@ -25,9 +25,10 @@ export default function Home() {
           justifyContent={"center"}
           position={"relative"}
         >
-          {gamePhase === "normal" && <NormalLayout />}
-          {gamePhase === "matching" && <MatchingLayout />}
-          {gamePhase === "game" && <GameLayout />}
+          {room.phase === "normal" && <NormalLayout />}
+          {room.phase === "matching" && <MatchingLayout />}
+          {room.phase === "game" && <GameLayout />}
+          {room.phase === "result" && <div>result</div>}
         </Box>
       </Box>
     </Center>
