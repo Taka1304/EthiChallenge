@@ -2,10 +2,12 @@ import { Box, Center, Heading, Motion, Textarea } from "@yamada-ui/react";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
 import { socketAtom } from "~/globalState/atoms";
+import Timer from "./Timer";
 
 const GameLayout = () => {
   const [socket] = useAtom(socketAtom);
   const [questions, setQuestions] = React.useState<string[]>([]);
+  const [timer, setTimer] = React.useState<number>(30);
 
   useEffect(() => {
     socket.on("question", (question: string) => {
@@ -47,7 +49,7 @@ const GameLayout = () => {
             opacity={0}
             >
             <Box w="4xl" p="2" bg="blackAlpha.300" borderRadius="md">
-              <Heading size="lg">{questions[0]}</Heading>
+              <Heading size="lg">{questions[questions.length - 1]}</Heading>
             </Box>
           </Motion>
           <Motion
@@ -62,7 +64,7 @@ const GameLayout = () => {
             }}
             opacity={0}
           >
-            <Heading size="lg">制限時間: {"30.00"}</Heading>
+            <Heading size="lg">制限時間: <Timer duration={30} /></Heading>
           </Motion>
           <Motion
             animate={{
