@@ -8,6 +8,7 @@ import MatchingLayout from "~/components/matching/MatchingLayout";
 import NormalLayout from "~/components/Normal/NormalLayout";
 import GameLayout from "~/components/game/GameLayout";
 import { roomAtom } from "~/globalState/atoms";
+import ResultLayout from "~/components/result/ResultLayout";
 
 export default function Game() {
   const [room] = useAtom(roomAtom);
@@ -28,7 +29,7 @@ export default function Game() {
           {room.phase === "normal" && <NormalLayout />}
           {room.phase === "matching" && <MatchingLayout />}
           {room.phase === "game" && <GameLayout />}
-          {room.phase === "result" && <div>result</div>}
+          {room.phase === "result" && <ResultLayout />}
         </Box>
       </Box>
     </Center>
