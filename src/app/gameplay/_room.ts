@@ -42,6 +42,8 @@ export async function joinRoom(player: Player, phrase: string) {
     if (room) {
       if (room.players.length >= 4) {
         return "Full";
+      } else if (room.phase !== "matching") {
+        return "Started";
       }
       room.players.push(player);
       console.log("joinRoom._room.ts", room);

@@ -14,12 +14,7 @@ import { useAtom } from "jotai";
 import React, { FC, useState } from "react";
 import { io } from "socket.io-client";
 import { joinRoom } from "~/app/gameplay/_room";
-import {
-  gamePhaseAtom,
-  playerAtom,
-  roomAtom,
-  socketAtom,
-} from "~/globalState/atoms";
+import { playerAtom, roomAtom, socketAtom } from "~/globalState/atoms";
 
 type Props = {
   playerName: string;
@@ -30,7 +25,6 @@ const JoinRoom: FC<Props> = ({ playerName }) => {
   const [error, setError] = useState("");
 
   const [, setSocket] = useAtom(socketAtom);
-  const [, setGamePhase] = useAtom(gamePhaseAtom);
   const [, setRoomState] = useAtom(roomAtom);
   const [, setPlayerState] = useAtom(playerAtom);
 
@@ -46,6 +40,7 @@ const JoinRoom: FC<Props> = ({ playerName }) => {
         avatar: "/images/000.png",
         name: playerName || "Player",
         scores: [],
+        feedbacks: [],
         answers: [],
         ready: false,
         isHost: false,
@@ -58,12 +53,13 @@ const JoinRoom: FC<Props> = ({ playerName }) => {
       } else if (room === "Full") {
         setError("ルームがいっぱいです");
         return;
+      } else if (room === "Started") {
+        setError("そのルームは既にゲームが始まっています");
       } else if (room) {
         setError("");
         socket.emit("joinRoom", room);
         setSocket(socket);
         setRoomState(room);
-        setGamePhase("matching");
         setPlayerState(player);
       }
     });

@@ -11,24 +11,26 @@ export const playerAtom = atom<Player>({
   id: "",
   avatar: "",
   name: "Player",
+  feedbacks: [],
   scores: [],
   answers: [],
   ready: false,
   isHost: false,
 });
 // 状態：ゲームフェーズ
-export const gamePhaseAtom = atom<GamePhase>("normal");
 
 export const roomAtom = atom<Room>({
   id: "",
   hostName: "",
   phrase: "",
+  phase: "normal",
   players: [
     {
       id: "",
       avatar: "",
       name: "Player",
       scores: [],
+      feedbacks: [],
       answers: [],
       ready: false,
       isHost: false,
@@ -38,4 +40,5 @@ export const roomAtom = atom<Room>({
     level: "ふつう",
     gameCount: 3,
   },
+  questions: [],
 });

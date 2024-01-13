@@ -1,11 +1,4 @@
-type GamePhase =
-  | "matching"
-  | "waiting"
-  | "answer"
-  | "scoring"
-  | "result"
-  | "finalResult"
-  | "normal";
+type GamePhase = "normal" | "matching" | "game" | "result" | "finalResult";
 
 type GameLevel = "かんたん" | "ふつう" | "むずかしい";
 
@@ -14,21 +7,39 @@ type Option = {
   gameCount: number;
 };
 
+type Evaluation =
+  | "theoreticalJudgement"
+  | "moralReasoning"
+  | "empathy"
+  | "socialResponsibility"
+  | "selfKnowledge"
+  | "total";
+
+type Feedbacks = {
+  [key in Evaluation]: string;
+};
+
+type Scores = {
+  [key in Evaluation]: number;
+};
+
 type Player = {
   id: string; // Socket.id
   avatar: string;
   name: string;
   scores: Scores[];
   answers: string[];
+  feedbacks: Feedbacks[];
   ready: boolean;
   isHost: boolean;
 };
 
-type Scores = {
-  theoreticalJudgement: number; // 論理的判断力
-  moralReasoning: number; // 道徳的推論
-  empathy: number; // 共感力
-  socialResponsibility: number; // 社会的責任
-  selfKnowledge: number; // 自己認識
-  generalEvaluation: number; // 総合評価
+type Room = {
+  id: string;
+  hostName: string;
+  phrase: string;
+  phase: GamePhase;
+  players: Player[];
+  questions: string[];
+  options: Option;
 };

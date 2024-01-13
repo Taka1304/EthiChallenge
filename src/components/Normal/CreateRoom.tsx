@@ -19,12 +19,7 @@ import { useAtom } from "jotai";
 import React, { FC, useState } from "react";
 import { io } from "socket.io-client";
 import { createRoom, existsPhrase } from "~/app/gameplay/_room";
-import {
-  roomAtom,
-  gamePhaseAtom,
-  playerAtom,
-  socketAtom,
-} from "~/globalState/atoms";
+import { roomAtom, playerAtom, socketAtom } from "~/globalState/atoms";
 
 type Props = {
   playerName: string;
@@ -45,7 +40,6 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
   });
   const [error, setError] = useState("");
   const [socket, setSocket] = useAtom(socketAtom);
-  const [, setGamePhase] = useAtom(gamePhaseAtom);
   const [, setRoomState] = useAtom(roomAtom);
   const [player, setPlayer] = useAtom(playerAtom);
 
@@ -89,12 +83,15 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
           gameCount: option.gameCount,
         },
         phrase: phrase,
+        phase: "matching" as GamePhase,
+        questions: [],
         players: [
           {
             name: playerName,
             id: socket.id || "",
             avatar: "/images/000.png",
             scores: [],
+            feedbacks: [],
             answers: [],
             ready: false,
             isHost: true,
@@ -102,7 +99,6 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
         ],
       };
       setRoomState(room);
-      setGamePhase("matching");
       createRoom(room);
     });
   };
