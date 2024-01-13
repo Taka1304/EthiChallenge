@@ -5,7 +5,7 @@ import { useAtom } from "jotai";
 import React from "react";
 import { io } from "socket.io-client";
 import MatchingLayout from "~/components/matching/MatchingLayout";
-import TopLayout from "~/components/top/TopLayout";
+import NormalLayout from "~/components/Normal/NormalLayout";
 import GameLayout from "~/components/game/GameLayout";
 import { gamePhaseAtom } from "~/globalState/atoms";
 
@@ -23,7 +23,7 @@ export default function Home() {
           alignItems="center"
           justifyContent="center"
         >
-          {gamePhase === "normal" && <TopLayout />}
+          {gamePhase === "normal" && <NormalLayout />}
           {gamePhase === "matching" && <MatchingLayout />}
           {gamePhase === "game" && <GameLayout />}
         </Box>

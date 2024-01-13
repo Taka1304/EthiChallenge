@@ -7,7 +7,7 @@ import JoinRoom from "./JoinRoom";
 import { playerAtom } from "~/globalState/atoms";
 import { useAtom } from "jotai";
 
-const TopLayout = () => {
+const NormalLayout = () => {
   const [player, setPlayer] = useAtom(playerAtom);
 
   return (
@@ -25,4 +25,4 @@ const TopLayout = () => {
   );
 };
 
-export default TopLayout;
+export default NormalLayout;
