@@ -5,7 +5,11 @@ import type { Socket as NetSocket } from "net";
 import type { Server as HttpServer } from "http";
 import { Server as SocketServer } from "socket.io";
 import { setRoom } from "~/app/gameplay/_room";
-import { makeModelAnswer, makeQuestion, makeScoring } from "~/app/gameplay/_openai";
+import {
+  makeModelAnswer,
+  makeQuestion,
+  makeScoring,
+} from "~/app/gameplay/_openai";
 
 // Next.jsの型定義を拡張してSocket.IOの型定義を追加
 type ResponseWebSocket = NextApiResponse & {
@@ -16,7 +20,7 @@ const corsMiddleware = cors();
 
 // 採点のレスポンスをパースする
 const parseScoreText = (scoreText: string) => {
-  console.log(scoreText)
+  console.log(scoreText);
   const feedbacks: Feedbacks = {
     theoreticalJudgement: "",
     moralReasoning: "",
@@ -30,7 +34,7 @@ const parseScoreText = (scoreText: string) => {
     empathy: 0,
     socialResponsibility: 0,
     selfKnowledge: 0,
-    total: 0
+    total: 0,
   };
 
   const lines = scoreText.split("\n");
@@ -39,7 +43,7 @@ const parseScoreText = (scoreText: string) => {
     const line = lines[i].trim();
     if (line === "") continue;
     const [text, score] = line.split(": ");
-    console.log(text, score)
+    console.log(text, score);
     if (score) {
       category = text;
       const scoreValue = parseInt(score, 10);
@@ -60,7 +64,10 @@ const parseScoreText = (scoreText: string) => {
           scores.selfKnowledge = scoreValue;
           break;
         case "Total evaluation":
-          scores.total = Math.max(parseInt(score.split("/")[0], 10), scoreValue);
+          scores.total = Math.max(
+            parseInt(score.split("/")[0], 10),
+            scoreValue,
+          );
           break;
         default:
       }
@@ -87,7 +94,7 @@ const parseScoreText = (scoreText: string) => {
   }
 
   return { feedbacks, scores };
-}
+};
 
 // Next.jsのAPIルーティングの入り口となる関数
 export default function SocketHandler(
@@ -141,12 +148,20 @@ export default function SocketHandler(
       const index = room.questions.length - 1;
 
       // 採点
-      const scoreText = await makeScoring(room.questions[index], data.answers[index]);
+      const scoreText = await makeScoring(
+        room.questions[index],
+        data.answers[index],
+      );
       const { feedbacks, scores } = parseScoreText(scoreText);
       console.log(feedbacks, scores);
       const updatedPlayers = room.players.map((player) => {
         if (player.id === data.id) {
-          return { ...data, feedbacks: [...data.feedbacks, feedbacks], scores: [...data.scores, scores] };
+          return {
+            ...data,
+            feedbacks: [...data.feedbacks, feedbacks],
+            scores: [...data.scores, scores],
+            ready: data.isHost,
+          };
         }
         return player;
       });
@@ -159,7 +174,9 @@ export default function SocketHandler(
       io.to(room.id).emit("updatePlayerState", updatedRoom);
 
       // 模範解答の生成
-      const modelAnswer = await makeModelAnswer(room.questions[room.questions.length - 1]);
+      const modelAnswer = await makeModelAnswer(
+        room.questions[room.questions.length - 1],
+      );
       io.to(room.id).emit("modelAnswer", modelAnswer);
     });
 
