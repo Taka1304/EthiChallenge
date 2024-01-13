@@ -1,0 +1,7 @@
+{
+  "name": "data-dreamers-group3",
+  "dockerComposeFile": "./docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/app",
+  "shutdownAction": "stopCompose"
+}

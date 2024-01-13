@@ -10,7 +10,7 @@ export const socketAtom = atom(null as unknown as Socket);
 export const playerAtom = atom<Player>({
   id: "",
   avatar: "",
-  name: "",
+  name: "Player",
   scores: [],
   answers: [],
   ready: false,
@@ -27,7 +27,7 @@ export const roomAtom = atom<Room>({
     {
       id: "",
       avatar: "",
-      name: "",
+      name: "Player",
       scores: [],
       answers: [],
       ready: false,
@@ -35,7 +35,7 @@ export const roomAtom = atom<Room>({
     },
   ],
   options: {
-    level: "かんたん",
+    level: "ふつう",
     gameCount: 3,
   },
 });

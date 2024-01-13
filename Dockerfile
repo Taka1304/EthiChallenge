@@ -1,6 +1,6 @@
 FROM node:18-slim
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
 
