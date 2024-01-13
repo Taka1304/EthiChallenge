@@ -57,6 +57,7 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
   });
 
   const setPhraseAndNext = async (phrase: string) => {
+    // TODO: phraseに\が含まれているとエラーになるので除去する
     if (!(await existsPhrase(phrase))) {
       setError("");
       onStepNext();

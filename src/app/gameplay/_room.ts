@@ -27,10 +27,9 @@ export async function createRoom(value: Room) {
   revalidatePath(`/gameplay`); // server mutation
 }
 
-export async function setRoom(phrase: string, roomId: string, room: Room) {
+export async function setRoom(room: Room) {
   console.log("setRoom._room.ts", room);
-  await kv.set(`${phrase}:${roomId}`, { room });
-  revalidatePath(`/gameplay`); // server mutation
+  await kv.set(`${room.phrase}:${room.id}`, room);
 }
 
 export async function joinRoom(player: Player, phrase: string) {
@@ -39,7 +38,7 @@ export async function joinRoom(player: Player, phrase: string) {
     return "NotFound";
   }
 
-  const room = await kv.get<Room>(`${phrase}:${roomId}`).then(async (room) => {
+  const data = await kv.get<Room>(`${phrase}:${roomId}`).then(async (room) => {
     if (room) {
       if (room.players.length >= 4) {
         return "Full";
@@ -51,7 +50,7 @@ export async function joinRoom(player: Player, phrase: string) {
     }
   });
   revalidatePath(`/gameplay`);
-  return room;
+  return data;
 }
 
 export async function deleteRoom(room: Room) {

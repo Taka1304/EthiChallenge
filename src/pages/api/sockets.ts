@@ -4,6 +4,7 @@ import cors from "cors";
 import type { Socket as NetSocket } from "net";
 import type { Server as HttpServer } from "http";
 import { Server as SocketServer } from "socket.io";
+import { setRoom } from "~/app/gameplay/_room";
 
 // Next.jsの型定義を拡張してSocket.IOの型定義を追加
 type ResponseWebSocket = NextApiResponse & {
@@ -54,10 +55,17 @@ export default function SocketHandler(
       socket.to(data.id).emit("startGame", data);
     });
 
-    socket.on("changePlayerState", (data: Player, roomId: string) => {
-      console.log("rooms: ", socket.rooms);
-      console.log("Received changePlayerState:", data, roomId);
-      io.to(roomId).emit("updatePlayerState", data);
+    socket.on("changePlayerState", (data: Player, room: Room) => {
+      console.log("Received changePlayerState:", data, room);
+      const updatedPlayers = room.players.map((player) => {
+        if (player.id === data.id) {
+          return data;
+        }
+        return player;
+      });
+      const updatedRoom: Room = { ...room, players: updatedPlayers };
+      setRoom(updatedRoom);
+      io.to(room.id).emit("updatePlayerState", updatedRoom);
     });
 
     // クライアントが切断した場合の処理

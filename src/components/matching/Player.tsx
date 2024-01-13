@@ -18,20 +18,18 @@ type Props = {
 };
 
 const Player: FC<Props> = ({ player }) => {
-  const [ready, setReady] = useState(false);
   const [image, setImage] = useState("/images/000.png");
 
-  const [socket, setSocket] = useAtom(socketAtom);
+  const [socket, ] = useAtom(socketAtom);
   const [playerState, setPlayerState] = useAtom(playerAtom);
-  const [roomState, setRoomState] = useAtom(roomAtom);
+  const [roomState, ] = useAtom(roomAtom);
 
   const handleReady = () => {
-    setReady(true);
     setPlayerState({ ...playerState, ready: true, avatar: image });
     socket.emit(
       "changePlayerState",
       { ...playerState, ready: true, avatar: image },
-      roomState.id,
+      roomState,
     );
   };
   const handleImage = () => {
@@ -84,7 +82,7 @@ const Player: FC<Props> = ({ player }) => {
         </>
       ) : (
         <Box h="full">
-          {ready ? (
+          {player.ready ? (
             <Heading size="xs">準備完了</Heading>
           ) : (
             <Heading size="xs">準備中...</Heading>

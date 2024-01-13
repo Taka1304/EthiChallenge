@@ -13,23 +13,15 @@ import { io } from "socket.io-client";
 const MatchingLayout = () => {
   const [socket, setSocket] = useAtom(socketAtom);
   const [roomState, setRoomState] = useAtom(roomAtom);
-  const [playerState, setPlayerState] = useAtom(playerAtom);
+  const [playerState,] = useAtom(playerAtom);
   const [, setGamePhase] = useAtom(gamePhaseAtom);
 
   const initSocket = async () => {
     console.log(socket);
 
-    socket.on("updatePlayerState", (data: Player) => {
+    socket.on("updatePlayerState", (data: Room) => {
       console.log("updatePlayerState", data);
-      setRoomState((prevRoomState) => {
-        const updatedPlayers = prevRoomState.players.map((player) => {
-          if (player.id === data.id) {
-            return data;
-          }
-          return player;
-        });
-        return { ...prevRoomState, players: updatedPlayers };
-      });
+      setRoomState(data)
     });
     socket.on("joinNewPlayer", (data: Room) => {
       console.log("joinNewPlayer", data);
@@ -42,10 +34,6 @@ const MatchingLayout = () => {
     socket.on("disconnect", () => {
       console.log("disconnect");
       setGamePhase("normal");
-    });
-    socket.on("updateRoomState", (data: Room) => {
-      console.log("updateRoomState", data);
-      setRoomState(data);
     });
   };
 
@@ -92,7 +80,11 @@ const MatchingLayout = () => {
         <Button onClick={handleDisconnect}>部屋から抜ける</Button>
         <Spacer />
         {playerState.isHost && (
-          <Button onClick={() => socket.emit("startGame", roomState.id)}>
+          <Button 
+            onClick={() => socket.emit("startGame", roomState.id)}
+            colorScheme="orange"
+            disabled={!roomState.players.every((player) => player.ready)}
+            >
             ゲームを開始する
           </Button>
         )}
