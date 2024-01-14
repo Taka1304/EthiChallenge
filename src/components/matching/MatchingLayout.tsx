@@ -12,23 +12,23 @@ const MatchingLayout = () => {
 
   useEffect(() => {
     const initSocket = async () => {
-      console.log(socket);
+      // console.log(socket);
 
       socket.on("updatePlayerState", (data: Room) => {
-        console.log("updatePlayerState", data);
+        // console.log("updatePlayerState", data);
         setRoomState(data);
       });
       socket.on("joinNewPlayer", (data: Room) => {
-        console.log("joinNewPlayer", data);
+        // console.log("joinNewPlayer", data);
         setRoomState(data);
       });
       socket.on("startGame", (room: Room) => {
-        console.log("startGame", room);
+        // console.log("startGame", room);
         setRoomState({ ...room, phase: "game" });
       });
       socket.on("disconnect", () => {
         // TODO: 切断時のRedis、RoomState更新処理
-        console.log("disconnect");
+        // console.log("disconnect");
         setRoomState({ ...roomState, phase: "normal" });
       });
     };
@@ -36,8 +36,8 @@ const MatchingLayout = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("roomState", roomState);
-  console.log("playerState", playerState);
+  // console.log("roomState", roomState);
+  // console.log("playerState", playerState);
 
   const handleDisconnect = () => {
     socket.disconnect();

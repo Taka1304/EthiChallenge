@@ -34,8 +34,8 @@ const RoomChart: FC<Props> = ({ roomState }) => {
     });
     return obj;
   });
-  console.log(roomState);
-  console.log(data);
+  // console.log(roomState);
+  // console.log(data);
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart

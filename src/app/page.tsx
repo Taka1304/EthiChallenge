@@ -103,7 +103,9 @@ export default function Home() {
                   w={"110%"}
                   boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
                 >
-                  <Heading fontSize={"2rem"}>New Generation Battle Game</Heading>
+                  <Heading fontSize={"2rem"}>
+                    New Generation Battle Game
+                  </Heading>
                 </Box>
               </Box>
               <Link href="/gameplay">
@@ -177,11 +179,13 @@ export default function Home() {
             <Box gridArea="text">
               <Container fontWeight="bold" fontSize={"1.4rem"}>
                 <Text>
-                  The ability to discern between good and evil, and to choose to do good deeds. <br />
+                  The ability to discern between good and evil, and to choose to
+                  do good deeds. <br />
                   {"Ethics"}
                 </Text>
                 <Text>
-                  You can cultivate a sense of morality through a gaming experience.
+                  You can cultivate a sense of morality through a gaming
+                  experience.
                   <br />
                   {"Competitive web application"}
                 </Text>
@@ -210,7 +214,6 @@ export default function Home() {
                   borderRadius={"50%"}
                 />
               </Box>
-
             </Box>
           </Grid>
         </Container>
@@ -359,9 +362,7 @@ export default function Home() {
                   alignItems={"center"}
                   textAlign={"center"}
                 >
-                  <Text>
-                    Model Answers by AI
-                  </Text>
+                  <Text>Model Answers by AI</Text>
                 </Box>
               </Grid>
             </Box>
@@ -401,14 +402,14 @@ export default function Home() {
             marginTop={"20px"}
           >
             <Text>
-              &quot;EthiChallenge&quot; is a competitive quiz game for elementary and middle school students that promotes moral education.
+              &quot;EthiChallenge&quot; is a competitive quiz game for
+              elementary and middle school students that promotes moral
+              education.
             </Text>
             <Text>
               What you learn through this quiz may be useful in the future.
             </Text>
-            <Text>
-              Let&apos;s all test our &quot;Ethics&quot; together.
-            </Text>
+            <Text>Let&apos;s all test our &quot;Ethics&quot; together.</Text>
           </Container>
         </Box>
         {/* END */}

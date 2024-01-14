@@ -36,7 +36,7 @@ const ResultLayout = () => {
   useEffect(() => {
     socket.off("modelAnswer");
     socket.on("modelAnswer", (modelAnswer: string) => {
-      console.log("modelAnswer", modelAnswer);
+      // console.log("modelAnswer", modelAnswer);
       setModelAnswer(modelAnswer);
       // setRoomState({
       //   ...roomState,
@@ -46,7 +46,7 @@ const ResultLayout = () => {
   }, []);
 
   useEffect(() => {
-    console.log("set playerState, in result");
+    // console.log("set playerState, in result");
     setPlayerState(
       roomState.players.find(
         (player) => player.id === playerState.id,
@@ -223,10 +223,10 @@ const ResultLayout = () => {
                   disabled={!roomState.players.every((player) => player.ready)}
                 >
                   {!roomState.players.every((player) => player.ready)
-                    // JP:全員の準備を待っています
-                    ? "Waiting for everyone to be ready"
-                    // 次の問題へ
-                    : "Next"}
+                    ? // JP:全員の準備を待っています
+                      "Waiting for everyone to be ready"
+                    : // 次の問題へ
+                      "Next"}
                 </Button>
               ) : (
                 <Button

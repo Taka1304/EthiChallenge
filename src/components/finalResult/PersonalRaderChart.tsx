@@ -38,10 +38,10 @@ const PersonalRaderChart: FC<Props> = ({ roomState }) => {
     let obj: { [key: string]: number | string } = {};
 
     Array.from({ length: roomState.options.gameCount }, (_, i) => {
-      console.log(i);
+      // console.log(i);
       obj[`game${i + 1}`] = player.scores[i][scoreType];
     });
-    console.log(obj);
+    // console.log(obj);
     return Object.assign(obj, {
       Evaluation: scoreType,
       fullMark: 20,

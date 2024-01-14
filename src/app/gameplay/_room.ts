@@ -7,13 +7,13 @@ import { revalidatePath } from "next/cache";
 
 export async function existsPhrase(phrase: string) {
   const phrases = await kv.scan(0, { match: `${phrase}:*` });
-  console.log("existsPhrase._room.ts", phrases);
+  // console.log("existsPhrase._room.ts", phrases);
   return phrases[1].length;
 }
 
 export async function getRoomId(phrase: string) {
   const roomId = await kv.scan(0, { match: `${phrase}:*` });
-  console.log("getRoomId._room.ts", roomId);
+  // console.log("getRoomId._room.ts", roomId);
   if (roomId[1].length === 0) {
     return "";
   }
@@ -21,14 +21,14 @@ export async function getRoomId(phrase: string) {
 }
 
 export async function createRoom(value: Room) {
-  console.log("createRoom._room.ts", value);
+  // console.log("createRoom._room.ts", value);
   // phrase:roomId, RoomData
   await kv.set(`${value.phrase}:${value.id}`, value);
   revalidatePath(`/gameplay`); // server mutation
 }
 
 export async function setRoom(room: Room) {
-  console.log("setRoom._room.ts", room);
+  // console.log("setRoom._room.ts", room);
   await kv.set(`${room.phrase}:${room.id}`, room);
 }
 
@@ -46,7 +46,7 @@ export async function joinRoom(player: Player, phrase: string) {
         return "Started";
       }
       room.players.push(player);
-      console.log("joinRoom._room.ts", room);
+      // console.log("joinRoom._room.ts", room);
       await kv.set(`${phrase}:${roomId}`, room);
       return room;
     }
@@ -56,7 +56,7 @@ export async function joinRoom(player: Player, phrase: string) {
 }
 
 export async function deleteRoom(room: Room) {
-  console.log("deleteRoom._room.ts", room);
+  // console.log("deleteRoom._room.ts", room);
 
   await kv.hdel(`${room.phrase}:${room.id}`);
   revalidatePath(`/gameplay`); // server mutation
