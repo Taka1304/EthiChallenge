@@ -28,6 +28,7 @@ const ResultLayout = () => {
     return scores.empathy + scores.moralReasoning + scores.selfKnowledge + scores.socialResponsibility + scores.theoreticalJudgement;
   }
   useEffect(() => {
+    socket.off("modelAnswer")
     socket.on("modelAnswer", (modelAnswer: string) => {
       console.log("modelAnswer", modelAnswer);
       setModelAnswer(modelAnswer);

@@ -171,7 +171,6 @@ export default function SocketHandler(
       const { feedbacks, scores } = parseScoreText(scoreText);
       const updatedPlayers = room.players.map((player) => {
         if (player.id === data.id) {
-          console.log("updatePlayers: ",data.scores)
           return {
             ...data,
             feedbacks: [...data.feedbacks, feedbacks],

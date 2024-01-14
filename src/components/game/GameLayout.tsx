@@ -24,6 +24,7 @@ const GameLayout = () => {
   const [roomState, setRoomState] = useAtom(roomAtom);
 
   useEffect(() => {
+    socket.off("question");
     socket.on("question", (question: string) => {
       console.log("question", question);
       setQuestion(question);
@@ -33,25 +34,25 @@ const GameLayout = () => {
       });
     });
     {player.isHost && 
+      socket.off("receiveHost");
       socket.on("receiveHost", (player: Player) => {
         console.log("receiveHost", player);
         setReceiveAnswer(receiveAnswer + 1);
-        setRoomState({
-          ...roomState,
+        setRoomState((prevRoomState) => ({
+          ...prevRoomState,
           players: roomState.players.map((p) =>
           p.id === player.id ? player : p
-          ),
-        });
+        )}));
       });
-    }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (end) {
-      setPlayer({ ...player, answers: [...player.answers, answer] });
       if (player.isHost) {
         if (receiveAnswer === roomState.players.length - 1) {
+          setPlayer({ ...player, answers: [...player.answers, answer] });
           socket.emit(
             "sendAnswer",
             { ...player, answers: [...player.answers, answer] },
@@ -59,6 +60,7 @@ const GameLayout = () => {
           );
         }
       } else {
+        setPlayer({ ...player, answers: [...player.answers, answer] });
         socket.emit(
           "sendHost",
           { ...player, answers: [...player.answers, answer] },
