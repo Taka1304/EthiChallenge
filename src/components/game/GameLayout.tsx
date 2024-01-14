@@ -84,7 +84,7 @@ const GameLayout = () => {
               bgClip="text"
               textAlign={"center"}
             >
-              そこまで!
+              Time&apos;s up!
             </Text>
           </ScaleFade>
           <Motion
@@ -99,7 +99,7 @@ const GameLayout = () => {
             }}
             position={"absolute"}
           >
-            <Heading size="4xl">{`第${roomState.questions.length}問`}</Heading>
+            <Heading size="4xl">{`Question${roomState.questions.length}`}</Heading>
           </Motion>
           <Box
             h="100vh"
@@ -167,7 +167,7 @@ const GameLayout = () => {
                 <Textarea
                   disabled={end}
                   bgColor="orange.50"
-                  placeholder="こたえを入力"
+                  placeholder="Enter your answer"
                   autoFocus
                   focusBorderColor="orange.800"
                   value={answer}
@@ -179,7 +179,7 @@ const GameLayout = () => {
         </>
       ) : (
         <Center w="max" h="max" display="flex" flexDir="column" gap="20">
-          <Heading>AIが問題を作成しています...</Heading>
+          <Heading>AI is generating questions...</Heading>
           <Motion
             animate={{
               scale: [1, 1.5, 1.5, 1, 1],

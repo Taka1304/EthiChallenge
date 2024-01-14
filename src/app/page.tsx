@@ -89,7 +89,10 @@ export default function Home() {
                   w={"90%"}
                   boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
                 >
-                  <Heading fontSize={"1.7rem"}>道徳心を試せ！！</Heading>
+                  <Heading fontSize={"1.7rem"}>
+                    Challenge! <br />
+                    Your Ethics!!
+                  </Heading>
                 </Box>
                 <Box
                   bg="white"
@@ -100,7 +103,7 @@ export default function Home() {
                   w={"110%"}
                   boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
                 >
-                  <Heading fontSize={"2rem"}>新感覚型対戦ゲーム</Heading>
+                  <Heading fontSize={"2rem"}>New Generation Battle Game</Heading>
                 </Box>
               </Box>
               <Link href="/gameplay">
@@ -116,9 +119,9 @@ export default function Home() {
                     borderWidth="100px"
                     border={"0.5px solid black"}
                     boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
-                    w={"40%"}
+                    w={"50%"}
                   >
-                    対戦する
+                    Challenge Now!
                   </Button>
                 </Box>
               </Link>
@@ -169,40 +172,45 @@ export default function Home() {
               >
                 <Image src="/images/logo.png" alt="logo" w={"full"} />
               </Box>
-              {/* 枠が横に伸びちゃうのを何とかしたい */}
             </Box>
 
             <Box gridArea="text">
-              <Container fontWeight="bold" fontSize={"1.2rem"}>
+              <Container fontWeight="bold" fontSize={"1.4rem"}>
                 <Text>
-                  善悪を判断して善を行おうとする心
-                  <br />
-                  「道徳心」
+                  The ability to discern between good and evil, and to choose to do good deeds. <br />
+                  {"Ethics"}
                 </Text>
                 <Text>
-                  ゲーム感覚で道徳心を身に着けることができる
+                  You can cultivate a sense of morality through a gaming experience.
                   <br />
-                  対戦型ウェブアプリ
+                  {"Competitive web application"}
                 </Text>
               </Container>
             </Box>
             <Box
-              gridArea="image"
-              h={"250px"}
-              w={"250px"}
-              borderRadius={"50%"}
-              bgGradient="linear(to-b, #ff5a00, #ffaa8c)"
-              // bg={"#ff5900"}
-              bg={"#ffaa8e"}
+              gridArea={"image"}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
             >
-              <Image
-                gridArea="image"
-                src="/images/home-003.png"
-                alt="/images/home-003.png"
+              <Box
                 h={"250px"}
                 w={"250px"}
                 borderRadius={"50%"}
-              />
+                bgGradient="linear(to-b, #ff5a00, #ffaa8c)"
+                // bg={"#ff5900"}
+                bg={"#ffaa8e"}
+              >
+                <Image
+                  gridArea="image"
+                  src="/images/home-003.png"
+                  alt="/images/home-003.png"
+                  h={"250px"}
+                  w={"250px"}
+                  borderRadius={"50%"}
+                />
+              </Box>
+
             </Box>
           </Grid>
         </Container>
@@ -213,7 +221,7 @@ export default function Home() {
         <Box margin={"150px 0px 0px 0px"} paddingLeft={"0px"}>
           <Divider />
           <Heading textAlign="center" padding={"10px"}>
-            EthiChallengeでできること
+            Game Experience
           </Heading>
           <Divider />
 
@@ -253,7 +261,7 @@ export default function Home() {
                     marginLeft={"0px"}
                   >
                     <Heading fontSize={"1.2rem"}>
-                      クイズを通して道徳を学び、
+                      Learn ethics through quizzes
                     </Heading>
                   </Box>
                   <Spacer />
@@ -268,7 +276,7 @@ export default function Home() {
                     textAlign={"center"}
                   >
                     <Heading fontSize={"1.2rem"}>
-                      道徳的考え方を身に着けよう
+                      Acquire moral thinking
                     </Heading>
                   </Box>
                 </Box>
@@ -276,6 +284,7 @@ export default function Home() {
                   <Image
                     bg={"white"}
                     src="/images/home-004.png"
+                    alt="/images/home-004.png"
                     margin={"40px"}
                     marginRight={"10px"}
                     borderRadius={"20"}
@@ -312,9 +321,9 @@ export default function Home() {
                   textAlign={"center"}
                 >
                   <Text>
-                    回答をAIが
+                    AI Grades
                     <br />
-                    自動で採点
+                    Your Answer
                   </Text>
                 </Box>
 
@@ -332,9 +341,9 @@ export default function Home() {
                   textAlign={"center"}
                 >
                   <Text>
-                    2人～4人
+                    2 ～ 4
                     <br />
-                    対戦
+                    Player Battle
                   </Text>
                 </Box>
                 <Box
@@ -351,9 +360,7 @@ export default function Home() {
                   textAlign={"center"}
                 >
                   <Text>
-                    模範解答
-                    <br />
-                    付き
+                    Model Answers by AI
                   </Text>
                 </Box>
               </Grid>
@@ -367,7 +374,7 @@ export default function Home() {
                   border={"0.5px solid black"}
                   boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
                 >
-                  対戦する
+                  Challenge Now!
                 </Button>
               </Link>
             </Box>
@@ -384,7 +391,7 @@ export default function Home() {
             paddingLeft={"10px"}
             paddingRight={"10px"}
           >
-            みんなで一緒に、道徳心を身につけませんか？
+            Let{"'"}s Acquire Moral Thinking Together!
           </Heading>
           <Divider bg={"#ffaa8c"} h={"5px"} marginTop={"15px"} />
           <Container
@@ -394,14 +401,14 @@ export default function Home() {
             marginTop={"20px"}
           >
             <Text>
-              アプリ名、は小学生から中学生を対象に、
-              <br />
-              対戦型クイズ形式で道徳を教育する場を提供しています。
+              &quot;EthiChallenge&quot; is a competitive quiz game for elementary and middle school students that promotes moral education.
             </Text>
             <Text>
-              このクイズを通して、学んだことが将来役に立つかもしれません。
+              What you learn through this quiz may be useful in the future.
             </Text>
-            <Text>さぁ、みんなで現在の自分の道徳力を試してみよう。</Text>
+            <Text>
+              Let&apos;s all test our &quot;Ethics&quot; together.
+            </Text>
           </Container>
         </Box>
         {/* END */}
