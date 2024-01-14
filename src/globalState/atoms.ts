@@ -37,7 +37,7 @@ export const roomAtom = atom<Room>({
     },
   ],
   options: {
-    level: "ふつう",
+    level: "Normal",
     gameCount: 3,
   },
   questions: [],

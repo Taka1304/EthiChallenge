@@ -29,13 +29,13 @@ const steps: Steps = [
   { title: "ゲーム数", description: "" },
   { title: "あいことば", description: "" },
 ];
-const LEVEL = ["かんたん", "ふつう", "むずかしい"];
+const LEVEL = ["Easy", "Normal", "Hard"];
 const GAME_COUNT = [1, 2, 3, 4, 5];
 
 const CreateRoom: FC<Props> = ({ playerName }) => {
   const [phrase, setPhrase] = useState("");
   const [option, setOption] = useState<Option>({
-    level: "かんたん", // Default
+    level: "Easy", // Default
     gameCount: 3,
   });
   const [error, setError] = useState("");

@@ -1,6 +1,7 @@
+// game → playing にしよう
 type GamePhase = "normal" | "matching" | "game" | "result" | "finalResult";
-
-type GameLevel = "かんたん" | "ふつう" | "むずかしい";
+// TODO: 英語にする
+type GameLevel = "Easy" | "Normal" | "Hard";
 
 type Option = {
   level: GameLevel;
@@ -8,16 +9,19 @@ type Option = {
 };
 
 type Evaluation =
-  | "theoreticalJudgement"
-  | "moralReasoning"
-  | "empathy"
-  | "socialResponsibility"
-  | "selfKnowledge"
-  | "total";
+  | "theoreticalJudgement" // 倫理的判断力
+  | "moralReasoning" // 道徳的推論力
+  | "empathy" // 共感力
+  | "socialResponsibility" // 社会的責任感
+  | "selfKnowledge" // 自己認識
+  | "total"; // 合計
 
-type Feedbacks = {
-  [key in Evaluation]: string;
-};
+type Feedbacks = Omit<
+  {
+    [key in Evaluation]: string;
+  },
+  "total"
+>;
 
 type Scores = {
   [key in Evaluation]: number;
