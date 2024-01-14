@@ -25,9 +25,9 @@ type Props = {
   playerName: string;
 };
 const steps: Steps = [
-  { title: "難易度", description: "" },
-  { title: "ゲーム数", description: "" },
-  { title: "あいことば", description: "" },
+  { title: "Level", description: "" },
+  { title: "Number of Maches", description: "" },
+  { title: "Passphrase", description: "" },
 ];
 const LEVEL = ["Easy", "Normal", "Hard"];
 const GAME_COUNT = [1, 2, 3, 4, 5];
@@ -56,7 +56,7 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
       setError("");
       onStepNext();
     } else {
-      setError("すでに使われているあいことばです");
+      setError("This passphrase is already used");
     }
   };
 
@@ -160,7 +160,7 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
                 <Input
                   type="text"
                   required
-                  placeholder="あいことばを入力"
+                  placeholder="Enter Passphrase"
                   value={phrase}
                   onChange={(e) => setPhrase(e.target.value)}
                 />
@@ -207,7 +207,7 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
               }
             }}
           >
-            {activeStep === 3 ? "つくる" : "次へ"}
+            {activeStep === 3 ? "Create" : "Next"}
           </Button>
         </ModalFooter>
       </Modal>

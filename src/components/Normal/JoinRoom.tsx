@@ -77,7 +77,7 @@ const JoinRoom: FC<Props> = ({ playerName }) => {
           </Heading>
           <Input
             type="text"
-            placeholder="あいことばを入力"
+            placeholder="Enter Passphrase"
             value={phrase}
             onChange={(e) => setPhrase(e.target.value)}
           />
@@ -87,11 +87,9 @@ const JoinRoom: FC<Props> = ({ playerName }) => {
         </ModalBody>
         <ModalFooter>
           <Button variant="ghost" onClick={onClose}>
-            {/* とじる */}
             Close
           </Button>
           <Button colorScheme="primary" onClick={handleSubmit}>
-            {/* さがす */}
             Search
           </Button>
         </ModalFooter>
