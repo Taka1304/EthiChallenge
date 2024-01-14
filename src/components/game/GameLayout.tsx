@@ -84,7 +84,7 @@ const GameLayout = () => {
               bgClip="text"
               textAlign={"center"}
             >
-              Time's up!
+              Time&apos;s up!
             </Text>
           </ScaleFade>
           <Motion

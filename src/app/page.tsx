@@ -284,6 +284,7 @@ export default function Home() {
                   <Image
                     bg={"white"}
                     src="/images/home-004.png"
+                    alt="/images/home-004.png"
                     margin={"40px"}
                     marginRight={"10px"}
                     borderRadius={"20"}
@@ -390,7 +391,7 @@ export default function Home() {
             paddingLeft={"10px"}
             paddingRight={"10px"}
           >
-            Let's Acquire Moral Thinking Together!
+            Let{"'"}s Acquire Moral Thinking Together!
           </Heading>
           <Divider bg={"#ffaa8c"} h={"5px"} marginTop={"15px"} />
           <Container
@@ -400,13 +401,13 @@ export default function Home() {
             marginTop={"20px"}
           >
             <Text>
-              {"EthiChallenge"} is a competitive quiz game for elementary and middle school students that promotes moral education.
+              &quot;EthiChallenge&quot; is a competitive quiz game for elementary and middle school students that promotes moral education.
             </Text>
             <Text>
               What you learn through this quiz may be useful in the future.
             </Text>
             <Text>
-              Let's all test our {"Ethics"} together.
+              Let&apos;s all test our &quot;Ethics&quot; together.
             </Text>
           </Container>
         </Box>
