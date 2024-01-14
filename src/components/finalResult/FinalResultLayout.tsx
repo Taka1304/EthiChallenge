@@ -9,6 +9,8 @@ import {
   Image,
   Flex,
   Heading,
+  Box,
+  Center,
 } from "@yamada-ui/react";
 import { useAtom } from "jotai";
 import React from "react";
@@ -41,7 +43,10 @@ const FinalResultLayout = () => {
   };
 
   return (
-    <div>
+    <Box>
+      <Center>
+        <Heading size="2xl">Final Result</Heading>
+      </Center>
       <Tabs variant="sticky">
         <Tab>Room</Tab>
         <Tab>Personal</Tab>
@@ -78,7 +83,7 @@ const FinalResultLayout = () => {
         <Spacer />
         <Button onClick={handleNextGame}>Next Game</Button>
       </HStack>
-    </div>
+    </Box>
   );
 };
 
