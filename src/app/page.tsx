@@ -178,12 +178,12 @@ export default function Home() {
               <Container fontWeight="bold" fontSize={"1.4rem"}>
                 <Text>
                   The ability to discern between good and evil, and to choose to do good deeds. <br />
-                  "Ethics"
+                  {"Ethics"}
                 </Text>
                 <Text>
                   You can cultivate a sense of morality through a gaming experience.
                   <br />
-                  "Competitive web application"
+                  {"Competitive web application"}
                 </Text>
               </Container>
             </Box>
@@ -406,7 +406,7 @@ export default function Home() {
               What you learn through this quiz may be useful in the future.
             </Text>
             <Text>
-              Let's all test our "Ethics" together.
+              Let's all test our {"Ethics"} together.
             </Text>
           </Container>
         </Box>
