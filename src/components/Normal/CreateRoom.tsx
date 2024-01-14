@@ -105,9 +105,9 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>部屋を作る</Button>
+      <Button onClick={onOpen}>Create Room</Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
-        <ModalHeader>部屋を作る</ModalHeader>
+        <ModalHeader>Create Room</ModalHeader>
         <ModalBody>
           <VStack minH="md">
             <Stepper index={activeStep} steps={steps} />
@@ -173,9 +173,9 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
             )}
             {activeStep === 3 && (
               <VStack>
-                <p>難易度：{option.level}</p>
-                <p>ゲーム数：{option.gameCount}</p>
-                <p>あいことば：{phrase}</p>
+                <p>Level：{option.level}</p>
+                <p>Number of Matches：{option.gameCount}</p>
+                <p>Passphrase：{phrase}</p>
               </VStack>
             )}
           </VStack>
@@ -192,7 +192,7 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
               }
             }}
           >
-            もどる
+            Back
           </Button>
           <Button
             disabled={activeStep === 2 && phrase === ""}

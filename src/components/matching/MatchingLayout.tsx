@@ -47,7 +47,7 @@ const MatchingLayout = () => {
 
   return (
     <Box textAlign="center" display="flex" flexDirection="column" gap="xl">
-      <Heading>The password for this room: {roomState.phrase}</Heading>
+      <Heading>The passphrase for this room: {roomState.phrase}</Heading>
       <Grid templateColumns="repeat(4, 1fr)" gap="md">
         {roomState.players.map((player) => (
           <PlayerAvatar key={player.id} player={player} />
