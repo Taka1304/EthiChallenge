@@ -194,10 +194,7 @@ const ResultLayout = () => {
                   variant="solid"
                   size="lg"
                   onClick={() =>
-                    socket.emit("finalResult", {
-                      ...roomState,
-                      phase: "finalResult",
-                    } as Room)
+                    socket.emit("finalResult", roomState, playerState)
                   }
                 >
                   最終結果を見る

@@ -208,6 +208,12 @@ export default function SocketHandler(
       io.to(room.id).emit("updatePlayerState", updatedRoom);
     });
 
+    socket.on("finalResult", (room: Room, player: Player) => {
+      console.log("Received finalResult:", room);
+      const updatedRoom: Room = { ...room, phase: "finalResult" };
+      player.isHost && setRoom(updatedRoom);
+      io.to(player.id).emit("updatePlayerState", updatedRoom);
+    });
     // クライアントが切断した場合の処理
     socket.on("disconnect", () => {
       console.log("A client disconnected.");
