@@ -24,7 +24,7 @@ const MatchingLayout = () => {
       });
       socket.on("startGame", (room: Room) => {
         console.log("startGame", room);
-        setRoomState({ ...roomState, phase: "game" });
+        setRoomState({ ...room, phase: "game" });
       });
       socket.on("disconnect", () => {
         // TODO: 切断時のRedis、RoomState更新処理

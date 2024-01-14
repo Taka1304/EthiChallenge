@@ -63,7 +63,7 @@ const parseScoreText = (scoreText: string) => {
         case "self-awareness":
           scores.selfKnowledge = scoreValue;
           break;
-        case "Total evaluation":
+        case "Total Evaluation":
           scores.total = Math.max(
             parseInt(score.split("/")[0], 10),
             scoreValue,
@@ -141,8 +141,24 @@ export default function SocketHandler(
       setRoom({ ...room, questions: [...room.questions, question] });
       io.to(room.id).emit("question", question);
     });
-
-    // TODO: この処理がプレイヤー数回、繰り返されてしまう
+    // 実行するのはホスト以外
+    socket.on("sendHost", async (data: Player, room: Room) => {
+      const index = room.questions.length - 1;
+      // 採点
+      const scoreText = await makeScoring(
+        room.questions[index],
+        data.answers[index],
+      );
+      const { feedbacks, scores } = parseScoreText(scoreText);
+      const hostId = room.players.find((player) => player.isHost)?.id as string;
+      socket.to(hostId).emit("receiveHost", {
+        ...data,
+        feedbacks: [...data.feedbacks, feedbacks],
+        scores: [...data.scores, scores],
+        ready: data.isHost,
+      });
+    })
+    // 実行するのはホスト
     socket.on("sendAnswer", async (data: Player, room: Room) => {
       console.log("Received answer:", data, room);
       const index = room.questions.length - 1;
@@ -153,9 +169,9 @@ export default function SocketHandler(
         data.answers[index],
       );
       const { feedbacks, scores } = parseScoreText(scoreText);
-      console.log(feedbacks, scores);
       const updatedPlayers = room.players.map((player) => {
         if (player.id === data.id) {
+          console.log("updatePlayers: ",data.scores)
           return {
             ...data,
             feedbacks: [...data.feedbacks, feedbacks],

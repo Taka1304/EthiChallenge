@@ -22,6 +22,11 @@ const ResultLayout = () => {
   const [playerState, setPlayerState] = useAtom(playerAtom);
   const [roomState, setRoomState] = useAtom(roomAtom);
 
+  const index = roomState.questions.length - 1;
+
+  const totalScore = (scores: Scores) => {
+    return scores.empathy + scores.moralReasoning + scores.selfKnowledge + scores.socialResponsibility + scores.theoreticalJudgement;
+  }
   useEffect(() => {
     socket.on("modelAnswer", (modelAnswer: string) => {
       console.log("modelAnswer", modelAnswer);
@@ -32,6 +37,12 @@ const ResultLayout = () => {
       // });
     });
   }, []);
+
+  useEffect(() => {
+    console.log("set playerState, in result")
+    setPlayerState(roomState.players.find((player) => player.id === playerState.id) as Player);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[roomState.players]);
 
   const handleReady = () => {
     setPlayerState({ ...playerState, ready: true });
@@ -60,7 +71,7 @@ const ResultLayout = () => {
           delay={showModelAnswer ? 0 : 1}
         >
           <Box display="flex" flexDir="row" gap="2" p="md">
-            <Heading textWrap="nowrap">{`第${roomState.questions.length}問`}</Heading>
+            <Heading textWrap="nowrap">{`第${index + 1}問`}</Heading>
             <ScrollArea
               maxH="60"
               p="2"
@@ -70,7 +81,7 @@ const ResultLayout = () => {
               innerProps={{ as: Box, gap: "md" }}
             >
               <Heading size="md">
-                {roomState.questions[roomState.questions.length - 1]}
+                {roomState.questions[index]}
               </Heading>
             </ScrollArea>
           </Box>
@@ -92,13 +103,13 @@ const ResultLayout = () => {
                 </Center>
               </Box>
             </Flex>
-            {roomState.players.map((player, index) => (
+            {roomState.players.map((player, i) => (
               <Flex
                 key={player.id}
                 border="solid 2px"
                 borderColor="orange"
                 roundedBottom={
-                  index === roomState.players.length - 1 ? "md" : "none"
+                  i === roomState.players.length - 1 ? "md" : "none"
                 }
               >
                 <Flex
@@ -124,13 +135,13 @@ const ResultLayout = () => {
                     innerProps={{ as: Box, gap: "md" }}
                   >
                     <Heading size="md">
-                      {player.answers[player.answers.length - 1]}
+                      {player.answers[index]}
                     </Heading>
                   </ScrollArea>
                 </Box>
                 <Box minW="4xs" minH="4xs" bg="warning">
                   <Center h="full">
-                    <Heading size="md">{player.scores[0].total}</Heading>
+                    <Heading size="md">{totalScore(player.scores[index])}</Heading>
                   </Center>
                 </Box>
               </Flex>
@@ -168,7 +179,7 @@ const ResultLayout = () => {
               <Heading size="md">{modelAnswer}</Heading>
             </ScrollArea>
             <Flex w="full" justifyContent="space-between">
-              {roomState.questions.length === roomState.options.gameCount ? (
+              {index + 1 === roomState.options.gameCount ? (
                 <Button
                   colorScheme="orange"
                   variant="solid"

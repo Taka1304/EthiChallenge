@@ -17,6 +17,7 @@ const GameLayout = () => {
   const [question, setQuestion] = useState<string>("");
   const [answer, setAnswer] = useState<string>("");
   const [end, setEnd] = useState(false);
+  const [receiveAnswer, setReceiveAnswer] = useState(0);
 
   const [socket] = useAtom(socketAtom);
   const [player, setPlayer] = useAtom(playerAtom);
@@ -31,23 +32,42 @@ const GameLayout = () => {
         questions: [...roomState.questions, question],
       });
     });
+    {player.isHost && 
+      socket.on("receiveHost", (player: Player) => {
+        console.log("receiveHost", player);
+        setReceiveAnswer(receiveAnswer + 1);
+        setRoomState({
+          ...roomState,
+          players: roomState.players.map((p) =>
+          p.id === player.id ? player : p
+          ),
+        });
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (end) {
-      // 「そこまで！」と表示してから3秒後に回答を送信する
-      setTimeout(() => {
-        setPlayer({ ...player, answers: [...player.answers, answer] });
+      setPlayer({ ...player, answers: [...player.answers, answer] });
+      if (player.isHost) {
+        if (receiveAnswer === roomState.players.length - 1) {
+          socket.emit(
+            "sendAnswer",
+            { ...player, answers: [...player.answers, answer] },
+            roomState
+          );
+        }
+      } else {
         socket.emit(
-          "sendAnswer",
+          "sendHost",
           { ...player, answers: [...player.answers, answer] },
-          roomState,
+          roomState
         );
-      }, 3000);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [end]);
+  }, [end, receiveAnswer]);
   return (
     <>
       {question ? (

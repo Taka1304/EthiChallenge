@@ -30,6 +30,7 @@ export default function Game() {
           {room.phase === "matching" && <MatchingLayout />}
           {room.phase === "game" && <GameLayout />}
           {room.phase === "result" && <ResultLayout />}
+          {room.phase === "finalResult" && <>finalResult</>}
         </Box>
       </Box>
     </Center>
