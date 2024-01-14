@@ -167,7 +167,7 @@ const GameLayout = () => {
                 <Textarea
                   disabled={end}
                   bgColor="orange.50"
-                  placeholder="こたえを入力"
+                  placeholder="Enter your answer"
                   autoFocus
                   focusBorderColor="orange.800"
                   value={answer}
