@@ -13,11 +13,7 @@ const NormalLayout = () => {
   return (
     <>
       <Box maxW="4xl" pb="xl">
-        <Image
-          src="/images/logo.png"
-          alt="logo"
-          w={"full"}
-          />
+        <Image src="/images/logo.png" alt="logo" w={"full"} />
       </Box>
       {/* <Heading>Ethic + Challenge</Heading> */}
       <Input

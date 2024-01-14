@@ -157,7 +157,7 @@ export default function SocketHandler(
         scores: [...data.scores, scores],
         ready: data.isHost,
       });
-    })
+    });
     // 実行するのはホスト
     socket.on("sendAnswer", async (data: Player, room: Room) => {
       console.log("Received answer:", data, room);

@@ -33,18 +33,19 @@ const GameLayout = () => {
         questions: [...roomState.questions, question],
       });
     });
-    {player.isHost && 
-      socket.off("receiveHost");
+    {
+      player.isHost && socket.off("receiveHost");
       socket.on("receiveHost", (player: Player) => {
         console.log("receiveHost", player);
         setReceiveAnswer(receiveAnswer + 1);
         setRoomState((prevRoomState) => ({
           ...prevRoomState,
           players: roomState.players.map((p) =>
-          p.id === player.id ? player : p
-        )}));
+            p.id === player.id ? player : p,
+          ),
+        }));
       });
-    };
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -56,7 +57,7 @@ const GameLayout = () => {
           socket.emit(
             "sendAnswer",
             { ...player, answers: [...player.answers, answer] },
-            roomState
+            roomState,
           );
         }
       } else {
@@ -64,7 +65,7 @@ const GameLayout = () => {
         socket.emit(
           "sendHost",
           { ...player, answers: [...player.answers, answer] },
-          roomState
+          roomState,
         );
       }
     }

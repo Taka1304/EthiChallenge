@@ -21,13 +21,17 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <Box w="full" h="full" p="md" display="flex" justifyContent="center" marginBottom={"0px"} paddingBottom={"0px"} bg="#ffffff">
-      <Box
-        maxW="4xl"
-        marginBottom={"0px"}
-        paddingBottom={"0px"}
-      >
-
+    <Box
+      w="full"
+      h="full"
+      p="md"
+      display="flex"
+      justifyContent="center"
+      marginBottom={"0px"}
+      paddingBottom={"0px"}
+      bg="#ffffff"
+    >
+      <Box maxW="4xl" marginBottom={"0px"} paddingBottom={"0px"}>
         {/* 一番上のアプリ名を書く水平コンテナ部分 */}
         {/* START */}
         <VStack w="full">
@@ -40,17 +44,10 @@ export default function Home() {
               boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
               maxW={"md"}
             >
-              <Image
-                src="/images/logo.png"
-                alt="logo"
-                w={"full"}
-                />
+              <Image src="/images/logo.png" alt="logo" w={"full"} />
             </Box>
           </HStack>
-          <HStack
-            justifyContent="flex-end"
-            h="3rem"
-          >
+          <HStack justifyContent="flex-end" h="3rem">
             {/* ランキング＆アチーブメントは削除 */}
             {/* 
             <UILink href=""
@@ -74,19 +71,15 @@ export default function Home() {
           bg="orange"
           bgGradient="linear(to-b, #ff812e, #ffffff)"
           borderRadius="30"
-          padding={'0'}
+          padding={"0"}
         >
           <Grid
             templateAreas={`
             "one two"
             `}
           >
-            <VStack
-              gridArea={"one"}
-            >
-              <Box
-                marginTop={"50px"}
-                marginBottom={"30px"}>
+            <VStack gridArea={"one"}>
+              <Box marginTop={"50px"} marginBottom={"30px"}>
                 <Box
                   bg="white"
                   textAlign={"center"}
@@ -96,9 +89,7 @@ export default function Home() {
                   w={"90%"}
                   boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
                 >
-                  <Heading
-                    fontSize={"1.7rem"}
-                  >道徳心を試せ！！</Heading>
+                  <Heading fontSize={"1.7rem"}>道徳心を試せ！！</Heading>
                 </Box>
                 <Box
                   bg="white"
@@ -109,15 +100,11 @@ export default function Home() {
                   w={"110%"}
                   boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
                 >
-                  <Heading
-                    fontSize={"2rem"}
-                  >新感覚型対戦ゲーム</Heading>
+                  <Heading fontSize={"2rem"}>新感覚型対戦ゲーム</Heading>
                 </Box>
               </Box>
               <Link href="/gameplay">
-                <Box
-                  textAlign={"center"}
-                >
+                <Box textAlign={"center"}>
                   <Button
                     margin={"5% 0% 10% 5%"}
                     paddingStart="2rem"
@@ -130,17 +117,14 @@ export default function Home() {
                     border={"0.5px solid black"}
                     boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
                     w={"40%"}
-                  >対戦する</Button>
+                  >
+                    対戦する
+                  </Button>
                 </Box>
               </Link>
             </VStack>
-            <Box
-              gridArea={"two"}
-            >
-              <ZStack
-                direction="top-left"
-              >
-
+            <Box gridArea={"two"}>
+              <ZStack direction="top-left">
                 {/* 画像 */}
                 <Image
                   src="images/home-002.png"
@@ -166,17 +150,15 @@ export default function Home() {
 
         {/* でっかくアプリ名が出てるところ、ハート画像が入っているコンテナ部分 */}
         {/* START */}
-        <Container
-          marginTop={"130px"}
-        >
+        <Container marginTop={"130px"}>
           <Grid
             gap="md"
             templateAreas={`
           "chapter empty image"
           "text text image"
-          "text text image"`}>
+          "text text image"`}
+          >
             <Box gridArea="chapter">
-              
               <Box
                 bg="#ff5100"
                 borderRadius="50"
@@ -185,26 +167,21 @@ export default function Home() {
                 boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
                 maxW={"md"}
               >
-                <Image
-                  src="/images/logo.png"
-                  alt="logo"
-                  w={"full"}
-                  />
+                <Image src="/images/logo.png" alt="logo" w={"full"} />
               </Box>
               {/* 枠が横に伸びちゃうのを何とかしたい */}
             </Box>
 
             <Box gridArea="text">
-              <Container
-                fontWeight="bold"
-                fontSize={"1.2rem"}
-              >
+              <Container fontWeight="bold" fontSize={"1.2rem"}>
                 <Text>
-                  善悪を判断して善を行おうとする心<br />
+                  善悪を判断して善を行おうとする心
+                  <br />
                   「道徳心」
                 </Text>
                 <Text>
-                  ゲーム感覚で道徳心を身に着けることができる<br />
+                  ゲーム感覚で道徳心を身に着けることができる
+                  <br />
                   対戦型ウェブアプリ
                 </Text>
               </Container>
@@ -218,7 +195,6 @@ export default function Home() {
               // bg={"#ff5900"}
               bg={"#ffaa8e"}
             >
-
               <Image
                 gridArea="image"
                 src="/images/home-003.png"
@@ -228,25 +204,18 @@ export default function Home() {
                 borderRadius={"50%"}
               />
             </Box>
-
           </Grid>
         </Container>
         {/* END */}
 
         {/* 「-- アプリ名でできること -- 」と書かれている、ルール説明部分 */}
         {/* START */}
-        <Box
-          margin={"150px 0px 0px 0px"}
-          paddingLeft={"0px"}
-        >
-
+        <Box margin={"150px 0px 0px 0px"} paddingLeft={"0px"}>
           <Divider />
-          <Heading
-            textAlign="center"
-            padding={"10px"}
-          >EthiChallengeでできること</Heading>
+          <Heading textAlign="center" padding={"10px"}>
+            EthiChallengeでできること
+          </Heading>
           <Divider />
-
 
           <Container
             marginTop={"30px"}
@@ -260,9 +229,9 @@ export default function Home() {
           >
             {/* キャッチコピーと画像 */}
             {/* START */}
-            <Box
-            >
-              <Grid templateAreas={`
+            <Box>
+              <Grid
+                templateAreas={`
               "one two"
               `}
               >
@@ -283,9 +252,9 @@ export default function Home() {
                     w={"110%"}
                     marginLeft={"0px"}
                   >
-                    <Heading
-                      fontSize={"1.2rem"}
-                    >クイズを通して道徳を学び、</Heading>
+                    <Heading fontSize={"1.2rem"}>
+                      クイズを通して道徳を学び、
+                    </Heading>
                   </Box>
                   <Spacer />
                   <Box
@@ -298,17 +267,14 @@ export default function Home() {
                     marginBottom={"30px"}
                     textAlign={"center"}
                   >
-                    <Heading
-                      fontSize={"1.2rem"}
-                    >道徳的考え方を身に着けよう</Heading>
+                    <Heading fontSize={"1.2rem"}>
+                      道徳的考え方を身に着けよう
+                    </Heading>
                   </Box>
-
                 </Box>
-                <Box
-                  gridArea="two"
-                >
+                <Box gridArea="two">
                   <Image
-                    bg={'white'}
+                    bg={"white"}
                     src="/images/home-004.png"
                     margin={"40px"}
                     marginRight={"10px"}
@@ -317,20 +283,15 @@ export default function Home() {
                     w={"300px"}
                   />
                 </Box>
-
               </Grid>
-
             </Box>
             {/* END */}
 
             {/* まる３つの部分 */}
             {/* START */}
-            <Box
-              margin={"0px"}
-              padding={"0px"}
-            >
-
-              <Grid templateAreas={`
+            <Box margin={"0px"} padding={"0px"}>
+              <Grid
+                templateAreas={`
               "one two three"
               `}
                 fontWeight={"bold"}
@@ -351,7 +312,8 @@ export default function Home() {
                   textAlign={"center"}
                 >
                   <Text>
-                    回答をAIが<br />
+                    回答をAIが
+                    <br />
                     自動で採点
                   </Text>
                 </Box>
@@ -370,7 +332,8 @@ export default function Home() {
                   textAlign={"center"}
                 >
                   <Text>
-                    2人～4人<br />
+                    2人～4人
+                    <br />
                     対戦
                   </Text>
                 </Box>
@@ -388,18 +351,15 @@ export default function Home() {
                   textAlign={"center"}
                 >
                   <Text>
-                    模範解答<br />
+                    模範解答
+                    <br />
                     付き
                   </Text>
                 </Box>
               </Grid>
-
             </Box>
-            <Box
-              textAlign={"center"}
-            >
+            <Box textAlign={"center"}>
               <Link href="/gameplay">
-
                 <Button
                   bg={"#f36304"}
                   borderRadius={"70"}
@@ -417,11 +377,7 @@ export default function Home() {
 
         {/* 最後の問いかけ部分 「みんなで一緒に、道徳心をみにつけませんか？」 */}
         {/* SATRT */}
-        <Box
-          marginTop={"150px"}
-          padding={"20px"}
-          justifyContent={"center"}
-        >
+        <Box marginTop={"150px"} padding={"20px"} justifyContent={"center"}>
           <Heading
             fontSize={"1.8rem"}
             textAlign={"center"}
@@ -430,11 +386,7 @@ export default function Home() {
           >
             みんなで一緒に、道徳心を身につけませんか？
           </Heading>
-          <Divider
-            bg={"#ffaa8c"}
-            h={"5px"}
-            marginTop={"15px"}
-          />
+          <Divider bg={"#ffaa8c"} h={"5px"} marginTop={"15px"} />
           <Container
             textAlign={"center"}
             fontWeight={"bold"}
@@ -442,15 +394,14 @@ export default function Home() {
             marginTop={"20px"}
           >
             <Text>
-              アプリ名、は小学生から中学生を対象に、<br />
+              アプリ名、は小学生から中学生を対象に、
+              <br />
               対戦型クイズ形式で道徳を教育する場を提供しています。
             </Text>
             <Text>
               このクイズを通して、学んだことが将来役に立つかもしれません。
             </Text>
-            <Text>
-              さぁ、みんなで現在の自分の道徳力を試してみよう。
-            </Text>
+            <Text>さぁ、みんなで現在の自分の道徳力を試してみよう。</Text>
           </Container>
         </Box>
         {/* END */}
@@ -461,10 +412,8 @@ export default function Home() {
           borderTopRadius={"30"}
           bgGradient="linear(to-b, #ff6500, #fdbd93)"
           h={"200px"}
-        >
-        </Box>
-
-      </Box >
-    </Box >
+        ></Box>
+      </Box>
+    </Box>
   );
 }
