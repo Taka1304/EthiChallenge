@@ -25,10 +25,16 @@ const ResultLayout = () => {
   const index = roomState.questions.length - 1;
 
   const totalScore = (scores: Scores) => {
-    return scores.empathy + scores.moralReasoning + scores.selfKnowledge + scores.socialResponsibility + scores.theoreticalJudgement;
-  }
+    return (
+      scores.empathy +
+      scores.moralReasoning +
+      scores.selfKnowledge +
+      scores.socialResponsibility +
+      scores.theoreticalJudgement
+    );
+  };
   useEffect(() => {
-    socket.off("modelAnswer")
+    socket.off("modelAnswer");
     socket.on("modelAnswer", (modelAnswer: string) => {
       console.log("modelAnswer", modelAnswer);
       setModelAnswer(modelAnswer);
@@ -40,10 +46,14 @@ const ResultLayout = () => {
   }, []);
 
   useEffect(() => {
-    console.log("set playerState, in result")
-    setPlayerState(roomState.players.find((player) => player.id === playerState.id) as Player);
+    console.log("set playerState, in result");
+    setPlayerState(
+      roomState.players.find(
+        (player) => player.id === playerState.id,
+      ) as Player,
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[roomState.players]);
+  }, [roomState.players]);
 
   const handleReady = () => {
     setPlayerState({ ...playerState, ready: true });
@@ -81,9 +91,7 @@ const ResultLayout = () => {
               borderRadius="md"
               innerProps={{ as: Box, gap: "md" }}
             >
-              <Heading size="md">
-                {roomState.questions[index]}
-              </Heading>
+              <Heading size="md">{roomState.questions[index]}</Heading>
             </ScrollArea>
           </Box>
           <Flex direction="column" p="md">
@@ -135,14 +143,14 @@ const ResultLayout = () => {
                     borderRadius="md"
                     innerProps={{ as: Box, gap: "md" }}
                   >
-                    <Heading size="md">
-                      {player.answers[index]}
-                    </Heading>
+                    <Heading size="md">{player.answers[index]}</Heading>
                   </ScrollArea>
                 </Box>
                 <Box minW="4xs" minH="4xs" bg="warning">
                   <Center h="full">
-                    <Heading size="md">{totalScore(player.scores[index])}</Heading>
+                    <Heading size="md">
+                      {totalScore(player.scores[index])}
+                    </Heading>
                   </Center>
                 </Box>
               </Flex>

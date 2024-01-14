@@ -1,10 +1,9 @@
-# data-dreamers-group3
+# EthiChallenge
 
-TODO: 名前変える↑
+![Logo](/public/images/logo.png)
 
 Azure OpenAI Hackathon 2023で作成したサービス
 
-TODO: サービスの説明
 
 ## 必要なもの
 
