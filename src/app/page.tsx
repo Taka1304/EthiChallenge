@@ -400,7 +400,7 @@ export default function Home() {
             marginTop={"20px"}
           >
             <Text>
-              "EthiChallenge" is a competitive quiz game for elementary and middle school students that promotes moral education.
+              {"EthiChallenge"} is a competitive quiz game for elementary and middle school students that promotes moral education.
             </Text>
             <Text>
               What you learn through this quiz may be useful in the future.
