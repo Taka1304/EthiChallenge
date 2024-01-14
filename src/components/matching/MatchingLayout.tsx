@@ -47,7 +47,7 @@ const MatchingLayout = () => {
 
   return (
     <Box textAlign="center" display="flex" flexDirection="column" gap="xl">
-      <Heading>このルームのあいことば: {roomState.phrase}</Heading>
+      <Heading>The password for this room: {roomState.phrase}</Heading>
       <Grid templateColumns="repeat(4, 1fr)" gap="md">
         {roomState.players.map((player) => (
           <PlayerAvatar key={player.id} player={player} />
@@ -73,7 +73,7 @@ const MatchingLayout = () => {
         )}
       </Grid>
       <HStack>
-        <Button onClick={handleDisconnect}>部屋から抜ける</Button>
+        <Button onClick={handleDisconnect}>Exit the room</Button>
         <Spacer />
         {playerState.isHost && (
           <Button
@@ -83,7 +83,7 @@ const MatchingLayout = () => {
             colorScheme="orange"
             disabled={!roomState.players.every((player) => player.ready)}
           >
-            ゲームを開始する
+            START
           </Button>
         )}
       </HStack>
