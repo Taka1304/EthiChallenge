@@ -54,17 +54,17 @@ const FinalResultLayout = () => {
         {/* <Tab>Feedbacks</Tab> */}
 
         <TabPanel>
-          <Container h="2xl" w="5xl">
+          <Container h="lg" w="4xl">
             <RoomChart roomState={roomState} />
           </Container>
         </TabPanel>
         {/* <TabPanel>
-        <Container h="2xl" w="5xl">
+        <Container h="lg" w="4xl">
           <Feedbacks roomState={roomState}/>
         </Container>
         </TabPanel> */}
         <TabPanel>
-          <Container h="2xl" w="5xl">
+          <Container h="lg" w="4xl">
             <PersonalRaderChart roomState={roomState} />
           </Container>
         </TabPanel>
