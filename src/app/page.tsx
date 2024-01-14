@@ -394,7 +394,7 @@ export default function Home() {
             marginTop={"20px"}
           >
             <Text>
-              アプリ名、は小学生から中学生を対象に、
+              EthiChallenge、は小学生から中学生を対象に、
               <br />
               対戦型クイズ形式で道徳を教育する場を提供しています。
             </Text>
