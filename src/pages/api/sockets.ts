@@ -20,7 +20,7 @@ const corsMiddleware = cors();
 
 // 採点のレスポンスをパースする
 const parseScoreText = (scoreText: string) => {
-  console.log(scoreText);
+  // console.log(scoreText);
   const feedbacks: Feedbacks = {
     theoreticalJudgement: "",
     moralReasoning: "",
@@ -43,7 +43,7 @@ const parseScoreText = (scoreText: string) => {
     const line = lines[i].trim();
     if (line === "") continue;
     const [text, score] = line.split(": ");
-    console.log(text, score);
+    // console.log(text, score);
     if (score) {
       category = text;
       const scoreValue = parseInt(score, 10);
@@ -115,26 +115,26 @@ export default function SocketHandler(
   // クライアントが接続してきたら、コネクションを確立する
   io.on("connection", (socket) => {
     const clientId = socket.id;
-    console.log(`A client connected. ID: ${clientId}`);
+    // console.log(`A client connected. ID: ${clientId}`);
 
     socket.on("createRoom", (data: CreateRoom) => {
-      console.log("Received create-room:", data);
+      // console.log("Received create-room:", data);
       socket.join(data.id);
     });
 
     // ルームに参加したら、同ルーム内の全クライアントに送信する
     socket.on("joinRoom", (data: Room) => {
-      console.log("Received join-room:", data);
+      // console.log("Received join-room:", data);
       socket.join(data.id);
       socket.to(data.id).emit("joinNewPlayer", data);
     });
     // メッセージを受信したら、同ルーム内の全クライアントに送信する
     socket.on("message", (data: Message) => {
-      console.log("Received message:", data);
+      // console.log("Received message:", data);
     });
 
     socket.on("nextGame", (room: Room) => {
-      console.log("Received nextGame:", room);
+      // console.log("Received nextGame:", room);
       room.phase = "matching";
       room.questions = [];
       room.players = room.players.map((player) => ({
@@ -148,7 +148,7 @@ export default function SocketHandler(
     });
 
     socket.on("startGame", async (room: Room) => {
-      console.log("Received startGame:", room);
+      // console.log("Received startGame:", room);
       io.to(room.id).emit("startGame", room);
 
       const question = await makeQuestion(room.options.level);
@@ -174,7 +174,7 @@ export default function SocketHandler(
     });
     // 実行するのはホスト
     socket.on("sendAnswer", async (data: Player, room: Room) => {
-      console.log("Received answer:", data, room);
+      // console.log("Received answer:", data, room);
       const index = room.questions.length - 1;
 
       // 採点
@@ -210,7 +210,7 @@ export default function SocketHandler(
     });
 
     socket.on("changePlayerState", (data: Player, room: Room) => {
-      console.log("Received changePlayerState:", data, room);
+      // console.log("Received changePlayerState:", data, room);
       const updatedPlayers = room.players.map((player) => {
         if (player.id === data.id) {
           return data;
@@ -223,12 +223,12 @@ export default function SocketHandler(
     });
 
     socket.on("finalResult", (room: Room) => {
-      console.log("Received finalResult:", room);
+      // console.log("Received finalResult:", room);
       setRoom(room);
     });
     // クライアントが切断した場合の処理
     socket.on("disconnect", () => {
-      console.log("A client disconnected.");
+      // console.log("A client disconnected.");
     });
   });
 

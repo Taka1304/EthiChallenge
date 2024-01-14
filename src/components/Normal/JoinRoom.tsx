@@ -34,7 +34,7 @@ const JoinRoom: FC<Props> = ({ playerName }) => {
     const socket = io({ autoConnect: false });
     socket.connect();
     socket.on("connect", async () => {
-      console.log(socket.id);
+      // console.log(socket.id);
       const player = {
         id: socket.id || "",
         avatar: "/images/000.png",

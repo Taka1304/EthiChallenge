@@ -26,7 +26,7 @@ const GameLayout = () => {
   useEffect(() => {
     socket.off("question");
     socket.on("question", (question: string) => {
-      console.log("question", question);
+      // console.log("question", question);
       setQuestion(question);
       setRoomState({
         ...roomState,
@@ -36,7 +36,7 @@ const GameLayout = () => {
     {
       player.isHost && socket.off("receiveHost");
       socket.on("receiveHost", (player: Player) => {
-        console.log("receiveHost", player);
+        // console.log("receiveHost", player);
         setReceiveAnswer(receiveAnswer + 1);
         setRoomState((prevRoomState) => ({
           ...prevRoomState,

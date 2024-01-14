@@ -67,7 +67,7 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
     socket.connect();
     socket.emit("createRoom", { id: roomId, name: playerName });
     socket.on("connect", () => {
-      console.log(socket.id);
+      // console.log(socket.id);
       setSocket(socket);
       setPlayer({
         ...player,
