@@ -84,7 +84,7 @@ const GameLayout = () => {
               bgClip="text"
               textAlign={"center"}
             >
-              そこまで!
+              Time's up!
             </Text>
           </ScaleFade>
           <Motion
@@ -179,7 +179,7 @@ const GameLayout = () => {
         </>
       ) : (
         <Center w="max" h="max" display="flex" flexDir="column" gap="20">
-          <Heading>AIが問題を作成しています...</Heading>
+          <Heading>AI is generating questions...</Heading>
           <Motion
             animate={{
               scale: [1, 1.5, 1.5, 1, 1],
