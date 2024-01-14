@@ -11,7 +11,6 @@ import {
   ArcElement,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2'; // グラフを表示するためのライブラリ
-import { faker } from '@faker-js/faker' // ダミーデータを作るためのライブラリ
 
 import {
   Box,
@@ -31,15 +30,17 @@ ChartJS.register(
 );
 
 export default function Result() {
-  // ダミーデータ
   const barColor = "rgba(252, 159, 50, 1)";
 
+  // ダミーデータ
   const data = {
     labels: ["Player1", "Player2", "Player3"],
     datasets: [
       {
         label: "得点",
-        data: [90, 30, 50],
+        data: [
+
+          90, 30, 50],
         backgroundColor: [
           "rgba(252, 159, 50, 1)",
           "rgba(252, 159, 50, 1)",
@@ -98,16 +99,12 @@ export default function Result() {
       <Box
         marginBottom={"5vh"}
       >
-        {/* ここ変更お願いします、ブラウザ終了をするわけじゃないから、Button */}
-        <Link
-          href=''
+        {/* 終了ボタン */}
+        <Button
+          bg={"#ffaa8c"}
         >
-          <Button
-            bg={"#ffaa8c"}
-          >
-            終了する
-          </Button>
-        </Link>
+          終了する
+        </Button>
       </Box>
       {/* END */}
 
@@ -129,16 +126,12 @@ export default function Result() {
       <Box
         marginBottom={"5vh"}
       >
-        {/* ここ変更お願いしますゲームの開始画面へのリンクになると思います */}
-        <Link
-          href=''
+        {/* もう一度遊ぶボタン */}
+        <Button
+          bg={"#ffaa8c"}
         >
-          <Button
-            bg={"#ffaa8c"}
-          >
-            もう一度遊ぶ
-          </Button>
-        </Link>
+          もう一度遊ぶ
+        </Button>
       </Box>
       {/* END */}
     </Box>
