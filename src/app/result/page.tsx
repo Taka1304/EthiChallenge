@@ -15,6 +15,7 @@ import { Bar } from 'react-chartjs-2'; // グラフを表示するためのラ�
 import {
   Box,
   Link,
+  VStack,
   Button,
   Heading,
 } from '@yamada-ui/react';
@@ -143,18 +144,46 @@ export default function Result() {
       </Box >
       {/* END */}
 
-      {/* 棒グラフ */}
+      {/* 真ん中の部分 */}
       {/* START */}
-      <Box
-        w={"80vw"}
-        h={"80vh"}
+      <VStack
+        // 子要素を画面に下側から詰めて配置
+        display="flex"
+        justifyContent="center"
+        alignItems="end"
       >
-        <Bar
-          data={data}
-          options={options}
-        ></Bar>
-      </Box>
+
+        {/* ページタイトル */}
+        {/* START */}
+        <Box
+          w={"80vw"}
+          h={"20vh"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <Heading
+            fontSize={"10vh"}
+          >RESULT</Heading>
+        </Box>
+        {/* END */}
+
+        {/* 棒グラフ */}
+        {/* START */}
+        <Box
+          w={"80vw"}
+          h={"80vh"}
+        >
+          <Bar
+            data={data}
+            options={options}
+          ></Bar>
+        </Box>
+        {/* END */}
+      </VStack>
       {/* END */}
+
+
 
       {/* もう一度遊ぶボタン */}
       {/* START */}
