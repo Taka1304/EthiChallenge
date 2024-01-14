@@ -33,16 +33,18 @@ export default function Home() {
         <VStack w="full">
           <HStack>
             <Box
-              bg="#f36804"
+              bg="#ff5100"
               borderRadius="50"
               paddingEnd="30"
               paddingStart="30"
               boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
+              maxW={"md"}
             >
-              <Heading
-                as="h3"
-                fontSize="2rem"
-              >アプリ名</Heading>
+              <Image
+                src="/images/logo.png"
+                alt="logo"
+                w={"full"}
+                />
             </Box>
           </HStack>
           <HStack
@@ -174,16 +176,21 @@ export default function Home() {
           "text text image"
           "text text image"`}>
             <Box gridArea="chapter">
-              <Heading
-                bg="#f36804"
-                paddingStart="2rem"
-                paddingEnd="2rem"
-                borderRadius="4rem"
-                fontSize="2rem"
-                paddingTop="1rem"
-                paddingBottom="1rem"
+              
+              <Box
+                bg="#ff5100"
+                borderRadius="50"
+                paddingEnd="30"
+                paddingStart="30"
                 boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
-              >アプリ名</Heading>
+                maxW={"md"}
+              >
+                <Image
+                  src="/images/logo.png"
+                  alt="logo"
+                  w={"full"}
+                  />
+              </Box>
               {/* 枠が横に伸びちゃうのを何とかしたい */}
             </Box>
 
@@ -237,7 +244,7 @@ export default function Home() {
           <Heading
             textAlign="center"
             padding={"10px"}
-          >アプリ名でできること</Heading>
+          >EthiChallengeでできること</Heading>
           <Divider />
 
 
