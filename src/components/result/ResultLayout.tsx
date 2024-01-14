@@ -163,7 +163,8 @@ const ResultLayout = () => {
               size="lg"
               onClick={() => setShowModelAnswer(true)}
             >
-              模範解答を見る
+              {/* 模範解答を見る */}
+              View Model Answers
             </Button>
           </Flex>
         </SlideFade>
@@ -176,7 +177,10 @@ const ResultLayout = () => {
           delay={showModelAnswer ? 1 : 0}
         >
           <Flex direction="column" alignItems="center" h="full" gap="xl">
-            <Heading size="lg">模範解答</Heading>
+            <Heading size="lg">
+              {/* 模範解答 */}
+              Model Answer
+            </Heading>
             <ScrollArea
               maxH="xl"
               maxW="5xl"
@@ -200,7 +204,8 @@ const ResultLayout = () => {
                     } as Room)
                   }
                 >
-                  最終結果を見る
+                  {/* 最終結果を見る */}
+                  View Final Result
                 </Button>
               ) : playerState.isHost ? (
                 <Button
@@ -216,8 +221,10 @@ const ResultLayout = () => {
                   disabled={!roomState.players.every((player) => player.ready)}
                 >
                   {!roomState.players.every((player) => player.ready)
-                    ? "全員の準備を待っています"
-                    : "次の問題へ"}
+                    // JP:全員の準備を待っています
+                    ? "Waiting for everyone to be ready"
+                    // 次の問題へ
+                    : "Next"}
                 </Button>
               ) : (
                 <Button
@@ -227,7 +234,8 @@ const ResultLayout = () => {
                   onClick={handleReady}
                   disabled={playerState.ready}
                 >
-                  次の問題を待つ
+                  {/* 次の問題を待つ */}
+                  Wait for Next Question
                 </Button>
               )}
             </Flex>

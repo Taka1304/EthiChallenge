@@ -48,13 +48,14 @@ const JoinRoom: FC<Props> = ({ playerName }) => {
 
       const room = await joinRoom(player, phrase);
       if (room === "NotFound") {
-        setError("ルームが見つかりませんでした");
+        setError("Not Found That Room");
         return;
       } else if (room === "Full") {
-        setError("ルームがいっぱいです");
+        setError("That Room is Full");
         return;
       } else if (room === "Started") {
-        setError("そのルームは既にゲームが始まっています");
+        // JP:そのルームはすでにゲームが始まっています
+        setError("That Room is Already Started");
       } else if (room) {
         setError("");
         socket.emit("joinRoom", room);
@@ -66,12 +67,13 @@ const JoinRoom: FC<Props> = ({ playerName }) => {
   };
   return (
     <>
-      <Button onClick={onOpen}>部屋に入る</Button>
+      <Button onClick={onOpen}>Join Room</Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
-        <ModalHeader>部屋に入る</ModalHeader>
+        <ModalHeader>Join Room</ModalHeader>
         <ModalBody>
           <Heading as="p" size="sm">
-            同じあいことばを入力した人と遊べます！
+            {/* JP:同じあいことばを入力した人と遊べます！ */}
+            You can play with someone who entered the same passphrase!
           </Heading>
           <Input
             type="text"
@@ -85,10 +87,12 @@ const JoinRoom: FC<Props> = ({ playerName }) => {
         </ModalBody>
         <ModalFooter>
           <Button variant="ghost" onClick={onClose}>
-            とじる
+            {/* とじる */}
+            Close
           </Button>
           <Button colorScheme="primary" onClick={handleSubmit}>
-            さがす
+            {/* さがす */}
+            Search
           </Button>
         </ModalFooter>
       </Modal>
