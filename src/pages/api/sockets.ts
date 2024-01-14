@@ -133,6 +133,12 @@ export default function SocketHandler(
       console.log("Received message:", data);
     });
 
+    socket.on("nextGame", (room: Room, player: Player) => {
+      console.log("Received nextGame:", room);
+      setRoom({ ...room, phase: "matching" });
+      io.to(player.id).emit("nextGame", room);
+    });
+
     socket.on("startGame", async (room: Room) => {
       console.log("Received startGame:", room);
       io.to(room.id).emit("startGame", room);
@@ -208,11 +214,9 @@ export default function SocketHandler(
       io.to(room.id).emit("updatePlayerState", updatedRoom);
     });
 
-    socket.on("finalResult", (room: Room, player: Player) => {
+    socket.on("finalResult", (room: Room) => {
       console.log("Received finalResult:", room);
-      const updatedRoom: Room = { ...room, phase: "finalResult" };
-      player.isHost && setRoom(updatedRoom);
-      io.to(player.id).emit("updatePlayerState", updatedRoom);
+      setRoom(room);
     });
     // クライアントが切断した場合の処理
     socket.on("disconnect", () => {

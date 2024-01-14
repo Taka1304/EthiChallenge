@@ -193,9 +193,14 @@ const ResultLayout = () => {
                   colorScheme="orange"
                   variant="solid"
                   size="lg"
-                  onClick={() =>
-                    socket.emit("finalResult", roomState, playerState)
-                  }
+                  onClick={() => {
+                    setRoomState({ ...roomState, phase: "finalResult" });
+                    playerState.isHost &&
+                      socket.emit("finalResult", {
+                        ...roomState,
+                        phase: "finalResult",
+                      });
+                  }}
                 >
                   最終結果を見る
                 </Button>
