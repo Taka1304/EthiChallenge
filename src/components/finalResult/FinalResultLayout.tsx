@@ -40,6 +40,7 @@ const FinalResultLayout = () => {
 
   const handleNextGame = () => {
     socket.emit("nextGame", roomState);
+    setRoomState({ ...roomState, phase: "matching", questions: []});
   };
 
   return (

@@ -133,10 +133,18 @@ export default function SocketHandler(
       console.log("Received message:", data);
     });
 
-    socket.on("nextGame", (room: Room, player: Player) => {
+    socket.on("nextGame", (room: Room) => {
       console.log("Received nextGame:", room);
+      room.phase = "matching";
+      room.questions = [];
+      room.players = room.players.map((player) => ({
+        ...player,
+        answers: [],
+        feedbacks: [],
+        scores: [],
+        ready: false,
+      }));
       setRoom({ ...room, phase: "matching" });
-      io.to(player.id).emit("nextGame", room);
     });
 
     socket.on("startGame", async (room: Room) => {
