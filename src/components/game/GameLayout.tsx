@@ -99,7 +99,7 @@ const GameLayout = () => {
             }}
             position={"absolute"}
           >
-            <Heading size="4xl">{`第${roomState.questions.length}問`}</Heading>
+            <Heading size="4xl">{`Question${roomState.questions.length}`}</Heading>
           </Motion>
           <Box
             h="100vh"
