@@ -20,7 +20,7 @@ export async function makeQuestion(level: GameLevel) {
         apiVersion: "2023-05-15",
       },
     );
-    const prompt = makeQ[level] as ChatRequestMessage[];
+    const prompt = makeQ[level].english as ChatRequestMessage[];
 
     const deploymentName = "GPT35TURBO16K";
     const res = await client.getChatCompletions(deploymentName, prompt);

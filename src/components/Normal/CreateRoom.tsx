@@ -25,9 +25,9 @@ type Props = {
   playerName: string;
 };
 const steps: Steps = [
-  { title: "難易度", description: "" },
-  { title: "ゲーム数", description: "" },
-  { title: "あいことば", description: "" },
+  { title: "Level", description: "" },
+  { title: "Number of Maches", description: "" },
+  { title: "Passphrase", description: "" },
 ];
 const LEVEL = ["Easy", "Normal", "Hard"];
 const GAME_COUNT = [1, 2, 3, 4, 5];
@@ -56,7 +56,7 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
       setError("");
       onStepNext();
     } else {
-      setError("すでに使われているあいことばです");
+      setError("This passphrase is already used");
     }
   };
 
@@ -105,9 +105,9 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>部屋を作る</Button>
+      <Button onClick={onOpen}>Create Room</Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
-        <ModalHeader>部屋を作る</ModalHeader>
+        <ModalHeader>Create Room</ModalHeader>
         <ModalBody>
           <VStack minH="md">
             <Stepper index={activeStep} steps={steps} />
@@ -160,7 +160,7 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
                 <Input
                   type="text"
                   required
-                  placeholder="あいことばを入力"
+                  placeholder="Enter Passphrase"
                   value={phrase}
                   onChange={(e) => setPhrase(e.target.value)}
                 />
@@ -173,9 +173,9 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
             )}
             {activeStep === 3 && (
               <VStack>
-                <p>難易度：{option.level}</p>
-                <p>ゲーム数：{option.gameCount}</p>
-                <p>あいことば：{phrase}</p>
+                <p>Level：{option.level}</p>
+                <p>Number of Matches：{option.gameCount}</p>
+                <p>Passphrase：{phrase}</p>
               </VStack>
             )}
           </VStack>
@@ -192,7 +192,7 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
               }
             }}
           >
-            もどる
+            Back
           </Button>
           <Button
             disabled={activeStep === 2 && phrase === ""}
@@ -207,7 +207,7 @@ const CreateRoom: FC<Props> = ({ playerName }) => {
               }
             }}
           >
-            {activeStep === 3 ? "つくる" : "次へ"}
+            {activeStep === 3 ? "Create" : "Next"}
           </Button>
         </ModalFooter>
       </Modal>

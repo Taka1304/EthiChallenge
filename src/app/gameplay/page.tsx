@@ -3,12 +3,12 @@
 import { Box, Center } from "@yamada-ui/react";
 import { useAtom } from "jotai";
 import React from "react";
-import { io } from "socket.io-client";
 import MatchingLayout from "~/components/matching/MatchingLayout";
 import NormalLayout from "~/components/Normal/NormalLayout";
 import GameLayout from "~/components/game/GameLayout";
 import { roomAtom } from "~/globalState/atoms";
 import ResultLayout from "~/components/result/ResultLayout";
+import FinalResultLayout from "~/components/finalResult/FinalResultLayout";
 
 export default function Game() {
   const [room] = useAtom(roomAtom);
@@ -30,7 +30,7 @@ export default function Game() {
           {room.phase === "matching" && <MatchingLayout />}
           {room.phase === "game" && <GameLayout />}
           {room.phase === "result" && <ResultLayout />}
-          {room.phase === "finalResult" && <>finalResult</>}
+          {room.phase === "finalResult" && <FinalResultLayout />}
         </Box>
       </Box>
     </Center>

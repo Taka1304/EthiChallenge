@@ -43,9 +43,7 @@ const Player: FC<Props> = ({ player }) => {
       <GridItem w="full" rounded="md" border="dashed" minH="xs">
         <Center h="full" flexDirection="column">
           <Heading as="h2" size="sm">
-            プレイヤーの参加を
-            <br />
-            待っています...
+            Waitng for players to join...
           </Heading>
           <Loading variant="dots" size="6xl" color="green.500" />
         </Center>
@@ -78,14 +76,14 @@ const Player: FC<Props> = ({ player }) => {
       </Box>
       {playerState.id === player.id ? (
         <>
-          <Button onClick={handleReady}>準備完了</Button>
+          <Button onClick={handleReady}>Ready to go!</Button>
         </>
       ) : (
         <Box h="full">
           {player.ready ? (
-            <Heading size="xs">準備完了</Heading>
+            <Heading size="xs">Ready to Go!</Heading>
           ) : (
-            <Heading size="xs">準備中...</Heading>
+            <Heading size="xs">Preparing...</Heading>
           )}
         </Box>
       )}
