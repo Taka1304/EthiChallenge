@@ -82,7 +82,7 @@ const ResultLayout = () => {
           delay={showModelAnswer ? 0 : 1}
         >
           <Box display="flex" flexDir="row" gap="2" p="md">
-            <Heading textWrap="nowrap">{`第${index + 1}問`}</Heading>
+            <Heading textWrap="nowrap">{`Question${index + 1}`}</Heading>
             <ScrollArea
               maxH="60"
               p="2"
