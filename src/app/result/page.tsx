@@ -37,21 +37,40 @@ export default function Result() {
     labels: ["Player1", "Player2", "Player3"],
     datasets: [
       {
-        label: "得点",
-        data: [
-
-          90, 30, 50],
+        label: "thoreticalJudgement",
+        data: [10, 10, 10],
         backgroundColor: [
-          "rgba(252, 159, 50, 1)",
-          "rgba(252, 159, 50, 1)",
-          "rgba(252, 159, 50, 1)",
+          "#001f4d",
         ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
+      },
+      {
+        label: "moralReasoning",
+        data: [10, 10, 10],
+        backgroundColor: [
+          "#ff4275",
         ],
-        borderWidth: 5,
+      },
+      {
+        label: "empathy",
+        data: [10, 10, 10],
+        backgroundColor: [
+          "#5ac8b8",
+        ],
+      },
+      {
+        label: "socialResponsibility",
+        data: [10, 10, 10],
+        backgroundColor: [
+          "#80461b",
+        ],
+      },
+      {
+        label: "selfknowledge",
+        data: [10, 10, 10],
+        backgroundColor: [
+          "#b39eda",
+        ],
+
       },
     ],
   };
@@ -59,17 +78,24 @@ export default function Result() {
   const options = {
     scales: {
       y: {
+        stacked: true,
         min: 0,
         max: 100, // 得点の最大値を入れる
         ticks: {
           stepsize: 10, // 目盛りの間隔
-          display: false, // 目盛りを消す
+          display: true, // 目盛りを消す
         },
+
       },
+      x: {
+        stacked: true,
+      }
     },
     plugins: {
       legend: {
-        display: false, // 凡例を非表示
+        display: true, // 凡例を非表示
+        // 凡例の位置を下にする
+        position: 'bottom',
       },
       tooltip: {
         enabled: false, // ツールチップを非表示
@@ -85,7 +111,7 @@ export default function Result() {
     <Box
       bgGradient="linear(to-t, #ffffff, #ff812e)"
 
-      // 大きさを部ライザの最大値にする
+      // 大きさをブラウザの最大値にする
       w={"100vw"}
       h={"100vh"}
 
@@ -102,6 +128,8 @@ export default function Result() {
         {/* 終了ボタン */}
         <Button
           bg={"#ffaa8c"}
+
+          boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
         >
           終了する
         </Button>
@@ -129,6 +157,7 @@ export default function Result() {
         {/* もう一度遊ぶボタン */}
         <Button
           bg={"#ffaa8c"}
+          boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
         >
           もう一度遊ぶ
         </Button>
