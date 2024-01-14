@@ -34,15 +34,19 @@ export default function Result() {
 
   // ダミーデータ
   const data = {
+    // プレイヤーの名前
     labels: ["Player1", "Player2", "Player3"],
     datasets: [
       {
         label: "thoreticalJudgement",
+        // このラベルにおける各プレイヤー得点
         data: [10, 10, 10],
+        // バーの色
         backgroundColor: [
           "#001f4d",
         ],
       },
+      // 以下同じ
       {
         label: "moralReasoning",
         data: [10, 10, 10],
@@ -59,7 +63,7 @@ export default function Result() {
       },
       {
         label: "socialResponsibility",
-        data: [10, 10, 10],
+        data: [20, 10, 10],
         backgroundColor: [
           "#80461b",
         ],
@@ -70,7 +74,6 @@ export default function Result() {
         backgroundColor: [
           "#b39eda",
         ],
-
       },
     ],
   };
@@ -83,7 +86,7 @@ export default function Result() {
         max: 100, // 得点の最大値を入れる
         ticks: {
           stepsize: 10, // 目盛りの間隔
-          display: true, // 目盛りを消す
+          display: true, // 目盛りを表示(明示的に書いた)
         },
 
       },
@@ -98,11 +101,15 @@ export default function Result() {
         position: 'bottom',
       },
       tooltip: {
-        enabled: false, // ツールチップを非表示
+        enabled: true, // ツールチップを表示(カーソルを合わせたときに出るやつ)明示的に書いた
+        // 単位を表示する(ツールチップの単位に'points'文字列を追加)
+        callbacks: {
+          label: function (context: any) {
+            return context.dataset.label + ": " + context.parsed.y + "points";
+          }
+        }
       },
-      customRank: {
-        position: 'center', // 順位表示をバーの中心に配置
-      },
+
     }
   };
 
@@ -126,14 +133,14 @@ export default function Result() {
         marginBottom={"5vh"}
       >
         {/* 終了ボタン */}
-        <Button
+        < Button
           bg={"#ffaa8c"}
 
           boxShadow="0px 3px 10px rgba(0, 0, 0, 0.25)"
         >
           終了する
-        </Button>
-      </Box>
+        </Button >
+      </Box >
       {/* END */}
 
       {/* 棒グラフ */}
@@ -163,7 +170,7 @@ export default function Result() {
         </Button>
       </Box>
       {/* END */}
-    </Box>
+    </Box >
   )
 }
 
