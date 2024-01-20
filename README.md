@@ -2,34 +2,39 @@
 
 ![Logo](/public/images/logo.png)
 
-Azure OpenAI Hackathon 2023で作成したサービス
+Azure OpenAI Hackathon 2023
 
+## Requirements
+- `.env.local`
+  - `AZURE_OPENAI_KEY`
+  - `AZURE_OPENAI_ENDPOINT`
+  - `KV_URL`
+  - `KV_REST_API_URL`
+  - `KV_REST_API_TOKEN`
+  - `KV_REST_API_READ_ONLY_TOKEN`
 
-## 必要なもの
+## Initial Setup(Development)
+Use by Docker or Node.js
 
-- Docker実行環境
-- Docker Compose ^2.22
-- `.env.local`ファイル
-
-## 実行手順
-
-1. Docker Desktop を起動
-
+### Docker
+Docker Compose >= v2.22
 ```
 docker compose build
 docker compose watch
-# 終了時
+
+# kill command
 Ctrl + C
 docker container stop data-dreamers-group3
 ```
 
-[localhost:3001](http://localhost:3001)にアクセス
+Access to [localhost:3001](http://localhost:3001)
 
-
-ローカルのNode環境で開発する場合
-
+### Node.js
+Node.js >= v20.7
 ```
 npm install -g pnpm
 pnpm i
 pnpm dev
 ```
+
+Access to [localhost:3000](http://localhost:3000)
